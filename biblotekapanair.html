@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteka Shkollore Profesionale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        html{
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary: #1a3e72;
+            --secondary: #4da6ff;
+            --accent: #ff6b6b;
+            --light: #f5f9ff;
+            --dark: #0a1a33;
+            --gray: #7f8c8d;
+            --light-gray: #e6f0ff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            padding-top: 80px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.75rem; }
+        h4 { font-size: 1.5rem; }
+        h5 { font-size: 1.25rem; }
+        h6 { font-size: 1rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        .bg-light {
+            background-color: var(--light);
+        }
+
+        .bg-white {
+            background-color: var(--white);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 1rem auto 0;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 200px;
+            box-shadow: var(--shadow);
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .action-icon {
+            position: relative;
+            margin-left: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .action-icon:hover {
+            color: var(--secondary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(rgba(26, 62, 114, 0.8), rgba(26, 62, 114, 0.8)), url('https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            padding: 150px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== SEARCH SECTION ===== */
+        .search-section {
+            background-color: var(--primary);
+            padding: 30px 0;
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-top: -30px;
+        }
+
+        .search-container {
+            display: flex;
+            background-color: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary);
+        }
+
+        .search-filters {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background-color: var(--secondary);
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* ===== BOOKS SECTION ===== */
+        .books-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .view-all {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .view-all i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .view-all:hover i {
+            transform: translateX(5px);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .book-img {
+            height: 300px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-img img {
+            transform: scale(1.05);
+        }
+
+        .book-info {
+            padding: 1.5rem;
+        }
+
+        .book-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .book-author {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .book-grade {
+            background-color: var(--light-gray);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .book-rating {
+            color: var(--warning);
+        }
+
+        .book-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .price-current {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-original {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-to-cart i {
+            margin-right: 5px;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary);
+        }
+
+        /* ===== CATEGORIES SECTION ===== */
+        .categories {
+            background-color: var(--light);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .category-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials {
+            background-color: var(--primary);
+            color: var(--white);
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .testimonials .section-title {
+            color: var(--white);
+        }
+
+        .testimonials .section-title::after {
+            background-color: var(--white);
+        }
+
+        .testimonials p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '\201C';
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        /* ===== BLOG SECTION ===== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .blog-meta span {
+            margin-right: 1rem;
+        }
+
+        .blog-meta i {
+            margin-right: 5px;
+        }
+
+        .blog-title {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .blog-excerpt {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .read-more {
+            color: var(--secondary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== NEWSLETTER SECTION ===== */
+        .newsletter {
+            background-color: var(--light);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: flex;
+            background-color: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== MODALS ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin-bottom: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(77, 166, 255, 0.2);
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* ===== CART SIDEBAR ===== */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            margin-bottom: 0;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--danger);
+        }
+
+        .cart-body {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-meta {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .cart-item-remove {
+            color: var(--danger);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cart-item-remove:hover {
+            text-decoration: underline;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        /* ===== OVERLAY ===== */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 0 0 1.5rem 0;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0;
+                display: block;
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+                margin-top: 0.5rem;
+                margin-left: 1rem;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0;
+                background-attachment: scroll;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 1rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .search-btn {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cart-sidebar {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-item h2 {
+                font-size: 2.5rem;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate {
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+
+        .slideInUp {
+            animation-name: slideInUp;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
+                    <span>Biblioteka </span>BSK
+                </a>
+
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active">Kryefaqja</a></li>
+                    
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Kategorit<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="grade1-4.html">Klasa 1-4</a></li>
+                            <li><a href="grade5-8.html">Klasa 5-8</a></li>
+                            <li><a href="grade9-12.html">Klasa 9-12</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#kontakt">Rreth nesh</a>
+                    </li>
+                </ul>
+
+                    <div class="action-icon login-icon" id="loginIcon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate fadeIn">The British School of Kosova</h1>
+            <p class="animate fadeIn delay-1">Zbuloni koleksionin tonë të pasur të librave arsimorë për të gjitha klasat dhe nivelet</p>
+            <div class="hero-btns animate fadeIn delay-2">
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Kërko librat, autorët, ose ISBN...">
+                <button class="search-btn"><i class="fas fa-search"></i> Kërko</button>
+            </div>
+            <div class="search-filters">
+                <span class="filter-tag active">Ballina</span>
+                <span class="filter-tag">Klasa 1-5</span>
+                <span class="filter-tag">Klasa 6-9</span>
+                <span class="filter-tag">Klasa 10-12</span>
+               
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pse të na zgjidhni ne?</h2>
+                <p>Ofrojmë shërbime cilësore për nevojat tuaja arsimore</p>
+            </div>
+
+        
+                <div class="feature-card animate slideInUp delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Mbështetje per te gjith nxensit Ndreqe...</h3>
+                    <p>Ekipi ynë është gjithmonë i gatshëm t'ju ndihmojë.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Books Section -->
+    <section class="books-section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Librat...</h2>
+                    <p>Tekst.......</p>
+                </div>
+                <a href="new-books.html" class="view-all">Shiko të gjitha <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Matematikë për Klasën 5</h3>
+                        <p class="book-author">Autori...</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 5</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.8</span>
+                        </div>
+                        <div class="book-price">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Gjuhë Shqipe për Klasën 7</h3>
+                        <p class="book-author">Autori...</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 7</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.5</span>
+                        </div>
+                        <div class="book-price">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Fizikë për Klasën 10</h3>
+                        <p class="book-author">Dr. Shkencëtar</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 9-12</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.9</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-current">18€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Histori për Klasën 6</h3>
+                        <p class="book-author">Prof. Historik</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 5-8</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.7</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-current">14€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offers Section -->
+    <section class="books-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Opsionet tjera</h2>
+                    <p>...........</p>
+                </div>
+                <a href="offers.html" class="view-all">Shiko të gjitha <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-badge">-30%</div>
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1581726707445-75cbe4efc586?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Abetare për Fillestarë</h3>
+                        <p class="book-author">Autor i Panjohur</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 1-4</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.9</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-original">15€</span>
+                            <span class="price-current">10€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-badge">-25%</div>
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Kimia për Abiturientë</h3>
+                        <p class="book-author">Dr. Kimist</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 9-12</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.8</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-original">25€</span>
+                            <span class="price-current">18€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-badge">-20%</div>
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Gjeografi për Klasën 8</h3>
+                        <p class="book-author">Prof. Gjeograf</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 5-8</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.6</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-original">18€</span>
+                            <span class="price-current">14€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-badge">-15%</div>
+                    <div class="book-img">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">Biologji për Klasën 9</h3>
+                        <p class="book-author">Dr. Biolog</p>
+                        <div class="book-meta">
+                            <span class="book-grade">Klasa 9-12</span>
+                            <span class="book-rating"><i class="fas fa-star"></i> 4.7</span>
+                        </div>
+                        <div class="book-price">
+                            <span class="price-original">20€</span>
+                            <span class="price-current">17€</span>
+                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kategoritë tona</h2>
+                <p>Zgjidhni sipas klasave dhe lëndëve tuaja të preferuara</p>
+            </div>
+
+            <div class="categories-grid">
+                <a href="grade1-4.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Klasa 1-5</h3>
+                    <p class="category-count">15+ libra</p>
+                </a>
+
+                <a href="grade5-8.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Klasa 5-9</h3>
+                    <p class="category-count">30+ libra</p>
+                </a>
+
+                <a href="grade9-12.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Klasa 10-12</h3>
+                    <p class="category-count">450+ libra</p>
+                </a>
+
+                
+
+                <a href="science.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3>Shkencë</h3>
+                    <p class="category-count">180+ libra</p>
+                </a>
+
+                <a href="history.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Histori</h3>
+                    <p class="category-count">120+ libra</p>
+                </a>
+
+                <a href="literature.html" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Letërsi</h3>
+                    <p class="category-count">250+ libra</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Çfarë thonë klientët tanë</h2>
+                <p>Opinione të vërteta nga nxënësit dhe prindërit</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Biblioteka më e mirë online për libra shkollorë! Kam gjetur gjithçka që më duhej për klasën time me çmime shumë të volitshme.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Klient">
+                        </div>
+                        <div class="author-info">
+                            <h4>Loris Geci</h4>
+                            <p>Nxënëse, Klasa 8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Shërbim i shkëlqyeshëm dhe dërgesë shumë e shpejtë. Librat erdhën në kushte të përkryera dhe me pakicë më të lirë se në librari.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Klient">
+                        </div>
+                        <div class="author-info">
+                            <h4>Mendim Shoshi</h4>
+                            <p>Prind</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Si mësues, e vlerësoj shumë koleksionin e gjerë të librave arsimorë. Gjithmonë gjej atë që më nevojitet për orët e mia.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Klient">
+                        </div>
+                        <div class="author-info">
+                            <h4>Leart Obertinca</h4>
+                            <p>Mësuese</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lajme dhe Artikuj</h2>
+                <p>Lexoni artikujt tanë më të fundit rreth arsimit dhe librave</p>
+            </div>
+
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar-alt"></i> 15 Maj 2023</span>
+                            <span><i class="far fa-eye"></i> 1.2K</span>
+                        </div>
+                        <h3 class="blog-title">Si të zgjedhësh librat e duhur për vitin e ri shkollor</h3>
+                        <p class="blog-excerpt">Një udhëzues i thjeshtë për prindërit dhe nxënësit për të zgjedhur librat më të përshtatshëm për nevojat e tyre arsimore...</p>
+                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar-alt"></i> 2 Qershor 2023</span>
+                            <span><i class="far fa-eye"></i> 890</span>
+                        </div>
+                        <h3 class="blog-title">Rëndësia e leximit në zhvillimin e fëmijëve</h3>
+                        <p class="blog-excerpt">Studime tregojnë se fëmijët që lexojnë rregullisht kanë përfitime të mëdha në zhvillimin intelektual dhe emocional...</p>
+                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-img">
+                        <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar-alt"></i> 20 Qershor 2023</span>
+                            <span><i class="far fa-eye"></i> 1.5K</span>
+                        </div>
+                        <h3 class="blog-title">Top 10 librat më të kërkuar për Abiturientët</h3>
+                        <p class="blog-excerpt">Lista jonë e librave më të kërkuar për studentët e klasës së 12-të që po përgatiten për provimet e maturës...</p>
+                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Abonohu në Newsletter-in tonë</h2>
+            <p>Regjistrohu për të marrë njoftimet më të fundit për ofertat dhe risitë tona</p>
+
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Shkruani email-in tuaj" required>
+                <button type="submit" class="newsletter-btn">Abonohu</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div id="kontakt"></div>
+                    <h3>Rreth nesh</h3>
+                    <p>Biblioteka Shkollore Online është platforma kryesore për blerjen e librave arsimorë në Kosovë. Misioni ynë është të bëjmë arsimin më të arritshëm për të gjithë.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Linqe të shpejta</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Kryefaqja</a></li>
+                        <li><a href="about.html">Rreth nesh</a></li>
+                        <li><a href="books.html">Të gjithë librat</a></li>
+                        <li><a href="new-books.html">Libra të rinj</a></li>
+                        <li><a href="offers.html">Oferta</a></li>
+                        <li><a href="contact.html">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Klasat</h3>
+                    <ul class="footer-links">
+                        <li><a href="grade1-4.html">Klasa 1-4</a></li>
+                        <li><a href="grade5-8.html">Klasa 5-8</a></li>
+                        <li><a href="grade9-12.html">Klasa 9-12</a></li>
+                        <li><a href="mathematics.html">Matematikë</a></li>
+                        <li><a href="language.html">Gjuhë Shqipe</a></li>
+                        <li><a href="science.html">Shkencë</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Kontakt</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rruga e Arsimit, Nr. 15, Prishtinë, Kosovë</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+383 44 123 456</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@bibliotekashkollore.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>E Hënë - E Premte: 08:00 - 20:00<br>E Shtunë: 09:00 - 15:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Biblioteka Shkollore Online. Të gjitha të drejtat e rezervuara.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Hyr në Llogari</h3>
+                <button class="close-modal" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Fjalëkalimi</label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="rememberMe" class="form-check-input">
+                            <label for="rememberMe" class="form-check-label">Më mbaj mend</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelLogin">Anulo</button>
+                <button class="btn btn-primary" id="submitLogin">Hyr</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Krijo Llogari</h3>
+                <button class="close-modal" id="closeRegisterModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Emri i plotë</label>
+                        <input type="text" id="registerName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Fjalëkalimi</label>
+                        <input type="password" id="registerPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Konfirmo Fjalëkalimin</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" id="agreeTerms" class="form-check-input" required>
+                            <label for="agreeTerms" class="form-check-label">Pajtohem me Kushtet e Përdorimit</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelRegister">Anulo</button>
+                <button class="btn btn-primary" id="submitRegister">Regjistrohu</button>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Modal Toggles
+        const loginIcon = document.getElementById('loginIcon');
+        const loginModal = document.getElementById('loginModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const cancelLogin = document.getElementById('cancelLogin');
+        const registerLink = document.createElement('p');
+        registerLink.innerHTML = 'Nuk keni llogari? <a href="#" id="showRegisterModal">Regjistrohu tani</a>';
+        registerLink.style.marginTop = '1rem';
+        registerLink.style.textAlign = 'center';
+        document.querySelector('#loginForm').after(registerLink);
+
+        const registerModal = document.getElementById('registerModal');
+        const showRegisterModal = document.getElementById('showRegisterModal');
+        const closeRegisterModal = document.getElementById('closeRegisterModal');
+        const cancelRegister = document.getElementById('cancelRegister');
+
+        const overlay = document.getElementById('overlay');
+
+        function toggleModal(modal) {
+            modal.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
+        }
+
+        loginIcon.addEventListener('click', () => toggleModal(loginModal));
+        closeLoginModal.addEventListener('click', () => toggleModal(loginModal));
+        cancelLogin.addEventListener('click', () => toggleModal(loginModal));
+        overlay.addEventListener('click', () => {
+            toggleModal(loginModal);
+            toggleModal(registerModal);
+        });
+
+        showRegisterModal.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleModal(loginModal);
+            toggleModal(registerModal);
+        });
+
+        closeRegisterModal.addEventListener('click', () => toggleModal(registerModal));
+        cancelRegister.addEventListener('click', () => toggleModal(registerModal));
+
+        // Cart Toggle
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Filter Books
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const bookCards = document.querySelectorAll('.book-card');
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filterValue = tag.textContent.trim();
+                
+                filterTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+
+                bookCards.forEach(card => {
+                    const categories = card.dataset.category.split(' ');
+                    
+                    if (filterValue === 'Të gjitha' || categories.includes(filterValue.toLowerCase().replace(' ', '-'))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Add to Cart
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const cartBadge = document.querySelector('.cart-icon .badge');
+        let cartItemsCount = parseInt(cartBadge.textContent);
+
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Change button text temporarily
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Shtuar';
+                this.style.backgroundColor = 'var(--success)';
+                
+                // Increment cart count
+                cartItemsCount++;
+                cartBadge.textContent = cartItemsCount;
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.backgroundColor = 'var(--secondary)';
+                }, 2000);
+            });
+        });
+
+        // Animations on scroll
+        const animateElements = document.querySelectorAll('.animate');
+        
+        function checkAnimation() {
+            animateElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkAnimation);
+        window.addEventListener('load', checkAnimation);
+    </script>
+</body>
+</html>
