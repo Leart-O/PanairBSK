@@ -6,9 +6,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<body>
+<?php include("header.php");?>
+
     <form action="upload.php" method="post" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Book Title" required><br>
         <input type="text" name="author" placeholder="Author" required><br>

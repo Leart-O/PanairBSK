@@ -28,14 +28,7 @@ if (!empty($_GET['id'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Image</title>
-</head>
-<body>
+<?php include("header.php");?>
     <h1>Book Image</h1>
     <img src="view.php?id=1" alt="Book Image">
 </body>

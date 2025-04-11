@@ -25,14 +25,8 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
                       JOIN users u ON bh.user_id = u.id
                       JOIN librat l ON bh.book_id = l.id");
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-</head>
-<body>
+ 
+ <?php include("header.php");?>
     <h1>Held Books</h1>
     <table border="1">
         <tr>

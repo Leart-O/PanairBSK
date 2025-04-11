@@ -51,14 +51,9 @@ if (!empty($_GET['id'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($book['title']); ?></title>
-</head>
-<body>
+
+<?php include("header.php");?>
+
     <h1><?php echo htmlspecialchars($book['title']); ?></h1>
     <img src="view.php?id=<?php echo $book['id']; ?>" alt="Book Image">
     <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author']); ?></p>

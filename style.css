@@ -1,4 +1,4 @@
- /* ===== RESET & BASE STYLES ===== */
+/* ===== RESET & BASE STYLES ===== */
  html{
     scroll-behavior: smooth;
 }
@@ -176,9 +176,8 @@ header {
 
 .header-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo on the left, nav links on the right */
     align-items: center;
-    padding: 15px 0;
 }
 
 .logo {
@@ -199,20 +198,23 @@ header {
 }
 
 .nav-links {
-    display: flex;
-    align-items: center;
+    margin-left: auto; /* Pushes the links to the right */
+    display: flex; 
+    align-items: center; 
+    list-style: none; 
 }
 
 .nav-links li {
-    margin-left: 1.5rem;
+    margin-left: 20px; /* Adds spacing between links */
     position: relative;
 }
 
 .nav-links a {
-    color: var(--dark);
+    text-decoration: none;
+    color: var(--dark); /* Use your theme color */
     font-weight: 600;
-    padding: 0.5rem 0;
-    position: relative;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
 }
 
 .nav-links a::after {
@@ -224,6 +226,10 @@ header {
     height: 2px;
     background-color: var(--secondary);
     transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: var(--secondary); /* Change color on hover */
 }
 
 .nav-links a:hover::after {
@@ -1171,7 +1177,7 @@ footer {
 
 .cart-item-meta {
     font-size: 0.9rem;
-    color: var(--gray);
+    color: var (--gray);
     margin-bottom: 0.5rem;
 }
 

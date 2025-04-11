@@ -38,9 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db->close();
 }
 ?>
-<!DOCTYPE html>
-<html>
-<body>
+<?php include("header.php");?>
+
     <form method="POST" action="login.php">
         <input type="text" name="name" placeholder="Name" required><br>
         <input type="password" name="password" placeholder="Password" required><br>
@@ -48,6 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </body>
 </html>
-<?php
-echo password_hash('admin', PASSWORD_DEFAULT);
-?>

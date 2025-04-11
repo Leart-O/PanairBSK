@@ -16,16 +16,8 @@ if ($db->connect_error) {
 // Fetch unique books from the database
 $result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat GROUP BY id");
 ?>
-<!DOCTYPE html>
-<html lang="sq">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteka Shkollore Profesionale</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+<?php include("header.php");?>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -35,17 +27,12 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <span>Biblioteka </span>BSK
                 </a>
 
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-
                 <ul class="nav-links" id="navLinks">
                     <li><a href="index.php" class="active">Kryefaqja</a></li>
                     <li><a href="#kontakt">Rreth nesh</a></li>
+                    <li><a href="signup.php">Regjistrohu</a></li>
+                    <li><a href="login.php">Kyqu</a></li>
                 </ul>
-
-                <div class="action-icon login-icon" id="loginIcon">
-                </div>
             </div>
         </div>
     </header>
