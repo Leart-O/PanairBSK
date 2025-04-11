@@ -96,7 +96,8 @@
          tag.classList.add('active');
 
          bookCards.forEach(card => {
-             const categories = card.dataset.category.split(' ');
+             const categories = card.dataset.cat
+             egory.split(' ');
              
              if (filterValue === 'Të gjitha' || categories.includes(filterValue.toLowerCase().replace(' ', '-'))) {
                  card.style.display = 'block';

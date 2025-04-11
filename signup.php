@@ -1,25 +1,31 @@
-<?php include("header.php");?>
+<?php include("header.php"); ?>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.php" class="logo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
-                    <span>Biblioteka </span>BSK
-                </a>
-
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.php" class="active">Kryefaqja</a></li>
-                    <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="signup.php">Regjistrohu</a></li>
-                    <li><a href="login.php">Kyqu</a></li>
-                </ul>
-            </div>
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Sign Up</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="signup.php" class="p-4 border rounded shadow bg-white">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mbiemri" class="form-label">Last Name</label>
+                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Enter your last name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="kartela_id" class="form-label">Kartela ID</label>
+                    <input type="text" name="kartela_id" id="kartela_id" class="form-control" placeholder="Enter your Kartela ID" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </form>
         </div>
-    </header>
-
-
+    </div>
+</div>
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,7 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
     $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
     if ($stmt->execute()) {
-        echo "Signup successful! You can now log in.";
+        // Redirect to index.php after successful signup
+        header('Location: index.php');
+        exit;
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -47,12 +55,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-    <form method="POST" action="signup.php">
-        <input type="text" name="name" placeholder="Full Name" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <input type="text" name="mbiemri" placeholder="Last Name" required><br>
-        <input type="text" name="kartela_id" placeholder="Kartela ID" required><br>
-        <button type="submit">Sign Up</button>
-    </form>
-</body>
-</html>
+<?php include("footer.php"); ?>

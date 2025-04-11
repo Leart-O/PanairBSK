@@ -29,21 +29,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             exit;
         } else {
-            echo "Invalid password.";
+            $error = "Invalid password.";
         }
     } else {
-        echo "User not found.";
+        $error = "User not found.";
     }
     $stmt->close();
     $db->close();
 }
 ?>
-<?php include("header.php");?>
 
-    <form method="POST" action="login.php">
-        <input type="text" name="name" placeholder="Name" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <button type="submit">Log In</button>
-    </form>
-</body>
-</html>
+<?php include("header.php"); ?>
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Log In</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="login.php" class="p-4 border rounded shadow bg-white">
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger text-center">
+                        <?php echo $error; ?>
+                    </div>
+                <?php endif; ?>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Log In</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php include("footer.php"); ?>

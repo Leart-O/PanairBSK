@@ -31,5 +31,4 @@ if (!empty($_GET['id'])) {
 <?php include("header.php");?>
     <h1>Book Image</h1>
     <img src="view.php?id=1" alt="Book Image">
-</body>
-</html>
+<?php include("footer.php");?>

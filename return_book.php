@@ -20,7 +20,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 JOIN book_holds bh ON l.id = bh.book_id
                 SET l.available_books = l.available_books + 1
                 WHERE bh.id = $hold_id");
+
+    // Redirect back to admin panel
     header('Location: admin.php');
     exit;
 }
 ?>
+
+<?php include("header.php"); ?>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <?php if (isset($message)): ?>
+                <div class="alert alert-success text-center">
+                    <?php echo $message; ?>
+                </div>
+                <a href="admin.php" class="btn btn-primary d-block mt-3">Back to Admin Panel</a>
+            <?php else: ?>
+                <div class="alert alert-danger text-center">
+                    No book return request was processed.
+                </div>
+                <a href="admin.php" class="btn btn-secondary d-block mt-3">Back to Admin Panel</a>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<?php include("footer.php"); ?>

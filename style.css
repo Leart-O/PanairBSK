@@ -1,5 +1,10 @@
 /* ===== RESET & BASE STYLES ===== */
- html{
+html, body {
+    height: auto;
+    overflow-x: hidden;
+}
+
+html{
     scroll-behavior: smooth;
 }
 :root {
@@ -38,6 +43,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 15px;
+    min-height: calc(100vh - 200px); /* Adjust based on header and footer height */
 }
 
 section {
@@ -92,6 +98,8 @@ ul {
     cursor: pointer;
     transition: var(--transition);
     border: none;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
 }
 
 .btn-primary {
@@ -119,7 +127,7 @@ ul {
 .btn-outline {
     background-color: transparent;
     border: 2px solid var(--primary);
-    color: var(--primary);
+    color: var (--primary);
 }
 
 .btn-outline:hover {
@@ -133,6 +141,8 @@ ul {
 
 .text-primary {
     color: var(--primary);
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 .text-secondary {
@@ -304,8 +314,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 600;
+    padding: 0.5rem 0.75rem;
 }
 
 .mobile-menu-btn {
@@ -903,9 +914,10 @@ header {
 
 /* ===== FOOTER ===== */
 footer {
-    background-color: var(--dark);
-    color: var(--white);
-    padding: 80px 0 0;
+    position: relative;
+    width: 100%;
+    background-color: var(--light);
+    padding: 20px 0;
 }
 
 .footer-grid {
@@ -1048,7 +1060,7 @@ footer {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--gray);
+    color: var (--gray);
     transition: var(--transition);
 }
 
@@ -1414,3 +1426,27 @@ footer {
 .delay-3 { animation-delay: 0.3s; }
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
+
+/* Add spacing and shadow to the book image */
+.img-fluid {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Add spacing to the form */
+form {
+    margin-top: 20px;
+}
+
+.table {
+    font-size: 0.9rem;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+h1.text-primary {
+    font-size: 2rem;
+    font-weight: bold;
+}
