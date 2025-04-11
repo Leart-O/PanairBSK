@@ -1,3 +1,21 @@
+<?php
+// DB details
+$dbHost = 'localhost';
+$dbUsername = 'root';
+$dbPassword = '';
+$dbName = 'bibloteka';
+
+// Create connection and select DB
+$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+// Check connection
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+
+// Fetch unique books from the database
+$result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat GROUP BY id");
+?>
 <!DOCTYPE html>
 <html lang="sq">
 <head>
@@ -12,7 +30,7 @@
     <header>
         <div class="container">
             <div class="header-inner">
-                <a href="index.html" class="logo">
+                <a href="index.php" class="logo">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
                     <span>Biblioteka </span>BSK
                 </a>
@@ -22,24 +40,11 @@
                 </button>
 
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html" class="active">Kryefaqja</a></li>
-                    
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Kategorit<i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-content">
-                            <li><a href="grade1-4.html">Klasa 1-4</a></li>
-                            <li><a href="grade5-8.html">Klasa 5-8</a></li>
-                            <li><a href="grade9-12.html">Klasa 9-12</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#kontakt">Rreth nesh</a>
-                    </li>
+                    <li><a href="index.php" class="active">Kryefaqja</a></li>
+                    <li><a href="#kontakt">Rreth nesh</a></li>
                 </ul>
 
-                    <div class="action-icon login-icon" id="loginIcon">
-                        <i class="fas fa-user"></i>
-                    </div>
+                <div class="action-icon login-icon" id="loginIcon">
                 </div>
             </div>
         </div>
@@ -98,81 +103,28 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-title">
-                    <h2>Librat...</h2>
-                    <p>Tekst.......</p>
+                    <h2>Librat</h2>
+                    <p>Zbuloni koleksionin tonë të librave</p>
                 </div>
-                <a href="new-books.html" class="view-all">Shiko të gjitha <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="books-grid">
-                <div class="book-card">
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Matematikë për Klasën 5</h3>
-                        <p class="book-author">Autori...</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 5</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.8</span>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <div class="book-card">
+                        <div class="book-img">
+                            <img src="view.php?id=<?php echo $row['id']; ?>" alt="Book Image">
                         </div>
-                        <div class="book-price">
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Gjuhë Shqipe për Klasën 7</h3>
-                        <p class="book-author">Autori...</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 7</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.5</span>
-                        </div>
-                        <div class="book-price">
+                        <div class="book-info">
+                            <h3 class="book-title"><?php echo htmlspecialchars($row['title']); ?></h3>
+                            <p class="book-author"><?php echo htmlspecialchars($row['author']); ?></p>
+                            <p class="book-status">
+                                <strong>Total Copies:</strong> <?php echo $row['total_books']; ?><br>
+                                <strong>Available Copies:</strong> <?php echo $row['available_books']; ?>
+                            </p>
+                            <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Fizikë për Klasën 10</h3>
-                        <p class="book-author">Dr. Shkencëtar</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 9-12</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.9</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-current">18€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër i ri">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Histori për Klasën 6</h3>
-                        <p class="book-author">Prof. Historik</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 5-8</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.7</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-current">14€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>

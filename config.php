@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 $user="root";
 $pass="";
@@ -14,4 +14,4 @@ try {
 } catch (PDOException $e) {
 	echo "error: " . $e->getMessage();
 }
- ?>
+ ?> -->
