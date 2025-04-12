@@ -1,41 +1,12 @@
 <?php
-// DB details
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'bibloteka';
-
-// Create connection and select DB
-$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
+session_start();
+include("config.php"); // Include the database connection
 
 // Fetch unique books from the database
 $result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat GROUP BY id");
 ?>
 <?php include("header.php");?>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.php" class="logo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
-                    <span>Biblioteka </span>BSK
-                </a>
-
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.php" class="active">Kryefaqja</a></li>
-                    <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="signup.php">Regjistrohu</a></li>
-                    <li><a href="login.php">Kyqu</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
 
     <!-- Hero Section -->
     <section class="hero">

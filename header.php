@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +19,18 @@
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.php" class="active">Kryefaqja</a></li>
-                <li><a href="#kontakt">Rreth nesh</a></li>
-                <?php if (isset($_SESSION['user_id'])): ?>
+                <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin'): ?>
+                    <!-- Admin Navbar -->
+                    <li><a href="admin.php" class="active">Admin Panel</a></li>
+                    <li><a href="upload.php">Shto një libër</a></li>
+                    <li><a href="logout.php">Log Out</a></li>
+                <?php elseif (isset($_SESSION['user_id'])): ?>
+                    <!-- User Navbar -->
+                    <li><a href="index.php" class="active">Kryefaqja</a></li>
+                    <li><a href="#kontakt">Rreth nesh</a></li>
                     <li><a href="logout.php">Log Out</a></li>
                 <?php else: ?>
+                    <!-- Guest Navbar -->
                     <li><a href="signup.php">Sign Up</a></li>
                     <li><a href="login.php">Log In</a></li>
                 <?php endif; ?>

@@ -1,4 +1,8 @@
+<?php
+session_start();
+?>
 <?php include("header.php"); ?>
+<?php include("config.php"); ?>
 
 <div class="container mt-5">
     <h1 class="text-center text-primary mb-4">Sign Up</h1>
@@ -8,14 +12,14 @@
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
+                </div>   
+                <div class="mb-3">
+                    <label for="mbiemri" class="form-label">Last Name</label>
+                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Enter your last name" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="mbiemri" class="form-label">Last Name</label>
-                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Enter your last name" required>
                 </div>
                 <div class="mb-3">
                     <label for="kartela_id" class="form-label">Kartela ID</label>
@@ -34,17 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mbiemri = $_POST['mbiemri'];
     $kartela_id = $_POST['kartela_id'];
 
-    // DB connection
-    $db = new mysqli('localhost', 'root', '', 'bibloteka');
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
 
     // Insert student into the `users` table
     $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
     $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
     if ($stmt->execute()) {
-        // Redirect to index.php after successful signup
+        // Set session variables
+        $_SESSION['user_id'] = $db->insert_id;
+        $_SESSION['role'] = 'student';
+
+        // Redirect to index.php
         header('Location: index.php');
         exit;
     } else {

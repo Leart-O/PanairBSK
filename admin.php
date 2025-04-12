@@ -5,19 +5,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// DB details
-$dbHost = 'localhost';
-$dbUsername = 'root';
-$dbPassword = '';
-$dbName = 'bibloteka';
-
-// Create connection and select DB
-$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-// Check connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
+include("config.php");
 
 // Fetch held books
 $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh.hold_date, bh.pickup_date, bh.return_status 
@@ -28,23 +16,24 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
 
 <?php include("header.php"); ?>
 
- <!-- Header -->
- <header>
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.php" class="logo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
-                    <span>Biblioteka </span>BSK
-                </a>
+<?php if (isset($_GET['message'])): ?>
+    <div class="alert alert-success text-center">
+        <?php echo htmlspecialchars($_GET['message']); ?>
+    </div>
+<?php endif; ?>
 
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.php" class="active">Kryefaqja</a></li>
-                    <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="signup.php">Regjistrohu</a></li>
-                    <li><a href="login.php">Kyqu</a></li>
-                </ul>
-            </div>
-        </div>
+<?php if (isset($_GET['error'])): ?>
+    <div class="alert alert-danger text-center">
+        <?php echo htmlspecialchars($_GET['error']); ?>
+    </div>
+<?php endif; ?>
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Admin Panel</h1>
+    <div class="table-responsive">
+        <p>Welcome to the admin panel. Manage your library system here.</p>
+    </div>
+</div>
 
 <div class="container mt-5">
     <h1 class="text-center text-primary mb-4">Held Books</h1>
@@ -70,16 +59,21 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
                         <td><?php echo $row['hold_date']; ?></td>
                         <td><?php echo $row['pickup_date']; ?></td>
                         <td><?php echo $row['return_status']; ?></td>
-
                         <td>
-                                <!-- Show action button only if status is pending -->
                             <?php if ($row['return_status'] === 'pending'): ?>
-                                <form method="POST" action="return_book.php">
+                                <!-- Mark as Returned Button -->
+                                <form method="POST" action="mark_returned.php" style="display:inline;">
                                     <input type="hidden" name="hold_id" value="<?php echo $row['id']; ?>">
                                     <button type="submit" class="btn btn-sm btn-success">Mark as Returned</button>
                                 </form>
-                            <?php else: ?>
-                                <button class="btn btn-sm btn-secondary" disabled>Returned</button>
+                            <?php endif; ?>
+
+                            <?php if ($row['return_status'] === 'returned'): ?>
+                                <!-- Delete Button -->
+                                <form method="POST" action="delete_book.php" style="display:inline;">
+                                    <input type="hidden" name="hold_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -87,7 +81,6 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
             </tbody>
         </table>
     </div>
-    <a href="logout.php" class="btn btn-danger mt-3">Logout</a>
 </div>
 
 <br><br><br><br>

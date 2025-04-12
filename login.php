@@ -3,12 +3,8 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $password = $_POST['password'];
-
-    // DB connection
-    $db = new mysqli('localhost', 'root', '', 'bibloteka');
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
+    
+    include("config.php");
 
     // Check user credentials
     $stmt = $db->prepare("SELECT id, password, role FROM users WHERE name = ?");

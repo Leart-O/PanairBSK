@@ -1,17 +1,15 @@
-<!-- <?php
+<?php
+// Database configuration
+$dbHost = 'localhost';
+$dbUsername = 'root';
+$dbPassword = '';
+$dbName = 'bibloteka';
 
-$user="root";
-$pass="";
-$server="localhost";
-$dbname="bibloteka";
+// Create connection
+$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-try {
-	
-	$conn =new PDO("mysql:host=$server;dbname=$dbname",$user,$pass);
-    echo "Connected successfully";
-
-
-} catch (PDOException $e) {
-	echo "error: " . $e->getMessage();
+// Check connection
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
 }
- ?> -->
+?>

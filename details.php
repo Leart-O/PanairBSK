@@ -2,19 +2,7 @@
 session_start(); // Start the session to access session variables
 
 if (!empty($_GET['id'])) {
-    // DB details
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'bibloteka';
-
-    // Create connection and select DB
-    $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-    // Check connection
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
+    include("config.php");
 
     // Fetch book details from the database
     $id = intval($_GET['id']); // Sanitize the input
@@ -54,24 +42,7 @@ if (!empty($_GET['id'])) {
 
 <?php include("header.php"); ?>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-inner">
-                <a href="index.php" class="logo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
-                    <span>Biblioteka </span>BSK
-                </a>
-
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.php" class="active">Kryefaqja</a></li>
-                    <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="signup.php">Regjistrohu</a></li>
-                    <li><a href="login.php">Kyqu</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+   
 
 <div class="container mt-5">
     <div class="row">
