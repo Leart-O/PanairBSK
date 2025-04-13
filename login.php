@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
                 <div class="mb-3">
                     <label for="name" class="form-label">Emri</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Fjalëkalimi</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Hyr</button>
             </form>

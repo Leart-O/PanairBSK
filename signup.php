@@ -11,19 +11,19 @@ session_start();
             <form method="POST" action="signup.php" class="p-4 border rounded shadow bg-white">
                 <div class="mb-3">
                     <label for="name" class="form-label">Emri</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" required>
                 </div>   
                 <div class="mb-3">
                     <label for="mbiemri" class="form-label">Mbiemri</label>
-                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Enter your last name" required>
+                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Shkruaj Mbiemrin" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Fjalëkalimi</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" required>
                 </div>
                 <div class="mb-3">
                     <label for="kartela_id" class="form-label">Nr. Studentor</label>
-                    <input type="text" name="kartela_id" id="kartela_id" class="form-control" placeholder="Enter your Kartela ID" required>
+                    <input type="text" name="kartela_id" id="kartela_id" class="form-control" placeholder="Shkruaj Nr. identifikues" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Regjistrohu</button>
             </form>
