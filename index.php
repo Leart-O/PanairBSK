@@ -77,10 +77,10 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                             <h3 class="book-title"><?php echo htmlspecialchars($row['title']); ?></h3>
                             <p class="book-author"><?php echo htmlspecialchars($row['author']); ?></p>
                             <p class="book-status">
-                                <strong>Total Copies:</strong> <?php echo $row['total_books']; ?><br>
-                                <strong>Available Copies:</strong> <?php echo $row['available_books']; ?>
+                                <strong>Kopje gjithsej:</strong> <?php echo $row['total_books']; ?><br>
+                                <strong>Kopje në dispozicion:</strong> <?php echo $row['available_books']; ?>
                             </p>
-                            <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                            <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Shiko Detajet</a>
                         </div>
                     </div>
                 <?php endwhile; ?>

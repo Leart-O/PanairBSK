@@ -11,7 +11,7 @@ if (!empty($_GET['id'])) {
         header("Content-type: image/jpeg");
         echo $imgData['foto'];
     } else {
-        echo 'Image not found...';
+        echo 'Imazhi nuk u gjet...';
     }
 }
 ?>

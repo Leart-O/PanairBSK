@@ -37,7 +37,7 @@ if (!empty($_GET['id'])) {
         $book['available_books'] -= 1;
 
         // Display success message
-        $success_message = "Book held successfully!";
+        $success_message = "Libri u rezervua me sukses!";
     }
 }
 ?>
@@ -56,11 +56,11 @@ if (!empty($_GET['id'])) {
         <!-- Book Details -->
         <div class="col-md-8">
             <h1 class="text-primary"><?php echo htmlspecialchars($book['title']); ?></h1>
-            <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
-            <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
-            <p><strong>Total Copies:</strong> <?php echo $book['total_books']; ?></p>
-            <p><strong>Available Copies:</strong> <?php echo $book['available_books']; ?></p>
-            <p><strong>Status:</strong> 
+            <p><strong>Autori:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
+            <p><strong>Përshkrimi:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
+            <p><strong>Kopje gjithsej:</strong> <?php echo $book['total_books']; ?></p>
+            <p><strong>Kopje në dispozicion:</strong> <?php echo $book['available_books']; ?></p>
+            <p><strong>Statusi:</strong> 
                 <span class="badge <?php echo $book['is_held'] ? 'bg-danger' : 'bg-success'; ?>">
                     <?php echo $book['is_held'] ? 'Held' : 'Available'; ?>
                 </span>
@@ -70,26 +70,26 @@ if (!empty($_GET['id'])) {
             <form method="post" class="mt-4">
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <div class="alert alert-warning">
-                        You must <a href="login.php" class="alert-link">log in</a> or <a href="signup.php" class="alert-link">sign up</a> to hold a book.
+                        Ju duhet të<a href="login.php" class="alert-link"> kyqeni</a> ose <a href="signup.php" class="alert-link">krijoni llogari</a> për të rezervuar këtë libër.
                     </div>
                 <?php else: ?>
                     <div class="mb-3">
-                        <label for="pickup_date" class="form-label">Pickup Date:</label>
+                        <label for="pickup_date" class="form-label">Data e marrjes:</label>
                         <input type="date" name="pickup_date" id="pickup_date" class="form-control" required>
                     </div>
                     <button type="submit" name="hold_book" class="btn btn-primary" <?php echo ($book['available_books'] == 0 || $book['is_held']) ? 'disabled' : ''; ?>>
-                        Hold Book
+                        Rezervo Librin
                     </button>
                     <?php if (isset($success_message)): ?>
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                            <strong>Success!</strong> <?php echo $success_message; ?>
+                            <strong>Sukses!</strong> <?php echo $success_message; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
             </form>
 
-            <a href="index.php" class="btn btn-secondary mt-3">Back to Books</a>
+            <a href="index.php" class="btn btn-secondary mt-3">Kthehu</a>
         </div>
     </div>
 </div>

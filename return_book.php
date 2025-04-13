@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-success text-center">
                     <?php echo $message; ?>
                 </div>
-                <a href="admin.php" class="btn btn-primary d-block mt-3">Back to Admin Panel</a>
+                <a href="admin.php" class="btn btn-primary d-block mt-3"> Kthehu në Panelin e Administratorit</a>
             <?php else: ?>
                 <div class="alert alert-danger text-center">
-                    No book return request was processed.
+                Nuk u përpunua asnjë kërkesë për kthim libri.
                 </div>
-                <a href="admin.php" class="btn btn-secondary d-block mt-3">Back to Admin Panel</a>
+                <a href="admin.php" class="btn btn-secondary d-block mt-3"> Kthehu në Panelin e Administratorit</a>
             <?php endif; ?>
         </div>
     </div>

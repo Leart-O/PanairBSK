@@ -10,24 +10,24 @@ include("config.php"); // Include the database connection
 <?php include("header.php"); ?>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Upload a New Book</h1>
+    <h1 class="text-center text-primary mb-4">Ngarko një libër të ri</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form action="upload.php" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow bg-white">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Book Title</label>
+                    <label for="title" class="form-label">Titulli i Librit</label>
                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter book title" required>
                 </div>
                 <div class="mb-3">
-                    <label for="author" class="form-label">Author</label>
+                    <label for="author" class="form-label">Autori</label>
                     <input type="text" name="author" id="author" class="form-control" placeholder="Enter author name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label">Përshkrimi</label>
                     <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter book description" required></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="category" class="form-label">Category</label>
+                    <label for="category" class="form-label">Kategoria</label>
                     <select name="category" id="category" class="form-control" required>
                         <option value="Klasa 1-5">Klasa 1-5</option>
                         <option value="Klasa 6-9">Klasa 6-9</option>
@@ -39,14 +39,14 @@ include("config.php"); // Include the database connection
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="total_books" class="form-label">Total Books in Stock</label>
+                    <label for="total_books" class="form-label">Totali i librave në stok</label>
                     <input type="number" name="total_books" id="total_books" class="form-control" placeholder="Enter total number of books" required>
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Book Image</label>
+                    <label for="image" class="form-label">Imazhi i Librit</label>
                     <input type="file" name="image" id="image" class="form-control" required>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary w-100">Upload Book</button>
+                <button type="submit" name="submit" class="btn btn-primary w-100">Ngarko Librin</button>
             </form>
         </div>
     </div>
@@ -70,12 +70,12 @@ if (isset($_POST["submit"])) {
         $insert = $db->query("INSERT INTO librat (title, author, description, category, foto, total_books, available_books) 
             VALUES ('$title', '$author', '$description', '$category', '$imgContent', $total_books, $total_books)");
         if ($insert) {
-            echo "Book uploaded successfully.";
+            echo "Libri u ngarkua me sukses.";
         } else {
-            echo "Book upload failed, please try again.";
+            echo "Ngarkimi i librit ka dështuar, ju lutem provoni përsëri.";
         }
     } else {
-        echo "Please select a valid image file to upload.";
+        echo "Ju lutem zgjidhni një skedar imazhi të vlefshëm për të ngarkuar.";
     }
 }
 ?>

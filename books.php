@@ -13,7 +13,7 @@ $result = $db->query($query);
 <?php include("header.php"); ?>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">All Books</h1>
+    <h1 class="text-center text-primary mb-4">Librat</h1>
 
     <!-- Category Filter -->
     <div class="mb-4 text-center">
@@ -38,10 +38,10 @@ $result = $db->query($query);
                     <h3 class="book-title"><?php echo htmlspecialchars($row['title']); ?></h3>
                     <p class="book-author"><?php echo htmlspecialchars($row['author']); ?></p>
                     <p class="book-status">
-                        <strong>Total Copies:</strong> <?php echo $row['total_books']; ?><br>
-                        <strong>Available Copies:</strong> <?php echo $row['available_books']; ?>
+                        <strong>Kopje gjithsej</strong> <?php echo $row['total_books']; ?><br>
+                        <strong>Kopje në dispozicion:</strong> <?php echo $row['available_books']; ?>
                     </p>
-                    <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                    <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Shiko Detajet</a>
                 </div>
             </div>
         <?php endwhile; ?>

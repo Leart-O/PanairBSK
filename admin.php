@@ -29,25 +29,25 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
 <?php endif; ?>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Admin Panel</h1>
+    <h1 class="text-center text-primary mb-4">Paneli i Administratorit</h1>
     <div class="table-responsive">
-        <p>Welcome to the admin panel. Manage your library system here.</p>
+        <p>Mirësevini në panelin e administratorit. Menaxhoni sistemin tuaj të bibliotekës këtu.</p>
     </div>
 </div>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Held Books</h1>
+    <h1 class="text-center text-primary mb-4">Librat e rezervuar</h1>
     <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
         <table class="table table-bordered table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Student Name</th>
+                    <th>Emri i Studentit</th>
                     <th>Kartela ID</th>
-                    <th>Book Title</th>
-                    <th>Hold Date</th>
-                    <th>Pickup Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th>Titulli i Librit</th>
+                    <th>Data e rezervimit</th>
+                    <th>Data e tërheqjes</th>
+                    <th>Statusi</th>
+                    <th>Veprime</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
                                 <!-- Mark as Returned Button -->
                                 <form method="POST" action="mark_returned.php" style="display:inline;">
                                     <input type="hidden" name="hold_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" class="btn btn-sm btn-success">Mark as Returned</button>
+                                    <button type="submit" class="btn btn-sm btn-success">Shëno si i kthyer</button>
                                 </form>
                             <?php endif; ?>
 
@@ -72,7 +72,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
                                 <!-- Delete Button -->
                                 <form method="POST" action="delete_book.php" style="display:inline;">
                                     <input type="hidden" name="hold_id" value="<?php echo $row['id']; ?>">
-                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Fshij</button>
                                 </form>
                             <?php endif; ?>
                         </td>

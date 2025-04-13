@@ -21,18 +21,18 @@
             <ul class="nav-links" id="navLinks">
                 <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin'): ?>
                     <!-- Admin Navbar -->
-                    <li><a href="admin.php" class="active">Admin Panel</a></li>
+                    <li><a href="admin.php" class="active">Paneli Administratorit</a></li>
                     <li><a href="upload.php">Shto një libër</a></li>
-                    <li><a href="logout.php">Log Out</a></li>
+                    <li><a href="logout.php">Shkyçu</a></li>
                 <?php elseif (isset($_SESSION['user_id'])): ?>
                     <!-- User Navbar -->
                     <li><a href="index.php" class="active">Kryefaqja</a></li>
                     <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="logout.php">Log Out</a></li>
+                    <li><a href="logout.php">Shkyqu</a></li>
                 <?php else: ?>
                     <!-- Guest Navbar -->
-                    <li><a href="signup.php">Sign Up</a></li>
-                    <li><a href="login.php">Log In</a></li>
+                    <li><a href="signup.php">Regjistrohu</a></li>
+                    <li><a href="login.php">Hyr</a></li>
                 <?php endif; ?>
             </ul>
         </div>

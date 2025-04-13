@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include("header.php"); ?>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Log In</h1>
+    <h1 class="text-center text-primary mb-4">Hyr</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="POST" action="login.php" class="p-4 border rounded shadow bg-white">
@@ -48,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label">Emri</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Fjalëkalimi</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Log In</button>
+                <button type="submit" class="btn btn-primary w-100">Hyr</button>
             </form>
         </div>
     </div>

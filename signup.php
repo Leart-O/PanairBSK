@@ -5,27 +5,27 @@ session_start();
 <?php include("config.php"); ?>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Sign Up</h1>
+    <h1 class="text-center text-primary mb-4">Regjistrohu</h1>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form method="POST" action="signup.php" class="p-4 border rounded shadow bg-white">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Full Name</label>
+                    <label for="name" class="form-label">Emri</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Enter your full name" required>
                 </div>   
                 <div class="mb-3">
-                    <label for="mbiemri" class="form-label">Last Name</label>
+                    <label for="mbiemri" class="form-label">Mbiemri</label>
                     <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Enter your last name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Fjalëkalimi</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
                 </div>
                 <div class="mb-3">
-                    <label for="kartela_id" class="form-label">Kartela ID</label>
+                    <label for="kartela_id" class="form-label">Nr. Studentor</label>
                     <input type="text" name="kartela_id" id="kartela_id" class="form-control" placeholder="Enter your Kartela ID" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                <button type="submit" class="btn btn-primary w-100">Regjistrohu</button>
             </form>
         </div>
     </div>
