@@ -27,6 +27,18 @@ include("config.php"); // Include the database connection
                     <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter book description" required></textarea>
                 </div>
                 <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="category" id="category" class="form-control" required>
+                        <option value="Klasa 1-5">Klasa 1-5</option>
+                        <option value="Klasa 6-9">Klasa 6-9</option>
+                        <option value="Klasa 10-12">Klasa 10-12</option>
+                        <option value="Fantazi">Fantazi</option>
+                        <option value="Dramë">Dramë</option>
+                        <option value="Aventurë">Aventurë</option>
+                        <option value="Mister">Mister</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="total_books" class="form-label">Total Books in Stock</label>
                     <input type="number" name="total_books" id="total_books" class="form-control" placeholder="Enter total number of books" required>
                 </div>
@@ -47,30 +59,20 @@ if (isset($_POST["submit"])) {
     $title = $_POST['title'];
     $author = $_POST['author'];
     $description = $_POST['description'];
+    $category = $_POST['category']; // Get the selected category
     $total_books = intval($_POST['total_books']); // Ensure it's an integer
     $check = getimagesize($_FILES["image"]["tmp_name"]);
     if ($check !== false) {
         $image = $_FILES['image']['tmp_name'];
         $imgContent = addslashes(file_get_contents($image));
 
-        // Check if the book already exists
-        $query = $db->query("SELECT * FROM librat WHERE title = '$title' AND author = '$author'");
-        if ($query->num_rows > 0) {
-            // Book exists, update the total_books and available_books
-            $db->query("UPDATE librat SET 
-                total_books = total_books + $total_books, 
-                available_books = available_books + $total_books 
-                WHERE title = '$title' AND author = '$author'");
-            echo "Book updated successfully.";
+        // Insert the new book into the database
+        $insert = $db->query("INSERT INTO librat (title, author, description, category, foto, total_books, available_books) 
+            VALUES ('$title', '$author', '$description', '$category', '$imgContent', $total_books, $total_books)");
+        if ($insert) {
+            echo "Book uploaded successfully.";
         } else {
-            // Book does not exist, insert a new record
-            $insert = $db->query("INSERT INTO librat (title, author, description, foto, total_books, available_books) 
-                VALUES ('$title', '$author', '$description', '$imgContent', $total_books, $total_books)");
-            if ($insert) {
-                echo "Book uploaded successfully.";
-            } else {
-                echo "Book upload failed, please try again.";
-            }
+            echo "Book upload failed, please try again.";
         }
     } else {
         echo "Please select a valid image file to upload.";

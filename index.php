@@ -2,8 +2,8 @@
 session_start();
 include("config.php"); // Include the database connection
 
-// Fetch unique books from the database
-$result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat GROUP BY id");
+// Fetch the 4 newest books
+$result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat ORDER BY id DESC LIMIT 4");
 ?>
 <?php include("header.php");?>
 
@@ -64,6 +64,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <h2>Librat</h2>
                     <p>Zbuloni koleksionin tonë të librave</p>
                 </div>
+                <a href="books.php" class="view-all">Shiko të gjitha <i class="fas fa-arrow-right"></i></a>
             </div>
 
             <div class="books-grid">
@@ -87,101 +88,6 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
         </div>
     </section>
 
-    <!-- Offers Section -->
-    <section class="books-section">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-title">
-                    <h2>Opsionet tjera</h2>
-                    <p>...........</p>
-                </div>
-                <a href="offers.html" class="view-all">Shiko të gjitha <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <div class="books-grid">
-                <div class="book-card">
-                    <div class="book-badge">-30%</div>
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1581726707445-75cbe4efc586?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Abetare për Fillestarë</h3>
-                        <p class="book-author">Autor i Panjohur</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 1-4</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.9</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-original">15€</span>
-                            <span class="price-current">10€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-badge">-25%</div>
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Kimia për Abiturientë</h3>
-                        <p class="book-author">Dr. Kimist</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 9-12</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.8</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-original">25€</span>
-                            <span class="price-current">18€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-badge">-20%</div>
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Gjeografi për Klasën 8</h3>
-                        <p class="book-author">Prof. Gjeograf</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 5-8</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.6</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-original">18€</span>
-                            <span class="price-current">14€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book-card">
-                    <div class="book-badge">-15%</div>
-                    <div class="book-img">
-                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Libër në ofertë">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">Biologji për Klasën 9</h3>
-                        <p class="book-author">Dr. Biolog</p>
-                        <div class="book-meta">
-                            <span class="book-grade">Klasa 9-12</span>
-                            <span class="book-rating"><i class="fas fa-star"></i> 4.7</span>
-                        </div>
-                        <div class="book-price">
-                            <span class="price-original">20€</span>
-                            <span class="price-current">17€</span>
-                            <button class="add-to-cart"><i class="fas fa-cart-plus"></i> Shto</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Categories Section -->
     <section class="categories">
         <div class="container">
@@ -191,7 +97,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
             </div>
 
             <div class="categories-grid">
-                <a href="grade1-4.html" class="category-card">
+                <a href="books.php?category=Klasa+1-5" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-child"></i>
                     </div>
@@ -199,15 +105,15 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <p class="category-count">15+ libra</p>
                 </a>
 
-                <a href="grade5-8.html" class="category-card">
+                <a href="books.php?category=Klasa+6-9" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h3>Klasa 5-9</h3>
+                    <h3>Klasa 6-9</h3>
                     <p class="category-count">30+ libra</p>
                 </a>
 
-                <a href="grade9-12.html" class="category-card">
+                <a href="books.php?category=Klasa+10-12" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
@@ -215,29 +121,35 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <p class="category-count">450+ libra</p>
                 </a>
 
-                
-
-                <a href="science.html" class="category-card">
+                <a href="books.php?category=Fantazi" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-atom"></i>
                     </div>
-                    <h3>Shkencë</h3>
+                    <h3>Fantazi</h3>
                     <p class="category-count">180+ libra</p>
                 </a>
 
-                <a href="history.html" class="category-card">
+                <a href="books.php?category=Dramë" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-landmark"></i>
                     </div>
-                    <h3>Histori</h3>
+                    <h3>Dramë</h3>
                     <p class="category-count">120+ libra</p>
                 </a>
 
-                <a href="literature.html" class="category-card">
+                <a href="books.php?category=Aventurë" class="category-card">
                     <div class="category-icon">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <h3>Letërsi</h3>
+                    <h3>Aventurë</h3>
+                    <p class="category-count">250+ libra</p>
+                </a>
+
+                <a href="books.php?category=Mister" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Mister</h3>
                     <p class="category-count">250+ libra</p>
                 </a>
             </div>
