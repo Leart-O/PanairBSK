@@ -30,14 +30,16 @@ if (!empty($_GET['id'])) {
         // Insert into `book_holds` table
         $stmt = $db->prepare("INSERT INTO book_holds (user_id, book_id, hold_date, pickup_date) VALUES (?, ?, CURDATE(), ?)");
         $stmt->bind_param('iis', $user_id, $id, $pickup_date);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            // Decrease available_books in `librat` table
+            $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
+            $book['available_books'] -= 1;
 
-        // Decrease available_books in `librat` table
-        $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
-        $book['available_books'] -= 1;
-
-        // Display success message
-        $success_message = "Libri u rezervua me sukses!";
+            // Display success message
+            $success_message = "Libri u rezervua me sukses!";
+        } else {
+            $error_message = "Rezervimi i librit dështoi. Ju lutem provoni përsëri.";
+        }
     }
 }
 ?>
@@ -83,6 +85,12 @@ if (!empty($_GET['id'])) {
                     <?php if (isset($success_message)): ?>
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                             <strong>Sukses!</strong> <?php echo $success_message; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($error_message)): ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            <strong>Gabim!</strong> <?php echo $error_message; ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     <?php endif; ?>
