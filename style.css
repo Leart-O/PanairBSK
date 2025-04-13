@@ -667,7 +667,7 @@ header {
 /* ===== TESTIMONIALS SECTION ===== */
 .testimonials {
     background-color: var(--primary);
-    color: var(--white);
+    color: var (--white);
     position: relative;
 }
 
@@ -1473,4 +1473,26 @@ h1.text-primary {
 .carousel-control-next-icon {
     font-size: 1.5rem; /* Increase icon size */
     color: var(--white); /* Ensure the icon is visible */
+}
+
+.alert {
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-dismissible .btn-close {
+    color: #155724;
+    opacity: 0.8;
+}
+
+.alert-dismissible .btn-close:hover {
+    opacity: 1;
 }

@@ -144,14 +144,6 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <h3>Aventurë</h3>
                     <p class="category-count">250+ libra</p>
                 </a>
-
-                <a href="books.php?category=Mister" class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
-                    <h3>Mister</h3>
-                    <p class="category-count">250+ libra</p>
-                </a>
             </div>
         </div>
     </section>

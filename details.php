@@ -35,7 +35,9 @@ if (!empty($_GET['id'])) {
         // Decrease available_books in `librat` table
         $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
         $book['available_books'] -= 1;
-        echo "Book held successfully!";
+
+        // Display success message
+        $success_message = "Book held successfully!";
     }
 }
 ?>
@@ -78,6 +80,12 @@ if (!empty($_GET['id'])) {
                     <button type="submit" name="hold_book" class="btn btn-primary" <?php echo ($book['available_books'] == 0 || $book['is_held']) ? 'disabled' : ''; ?>>
                         Hold Book
                     </button>
+                    <?php if (isset($success_message)): ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                            <strong>Success!</strong> <?php echo $success_message; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             </form>
 
