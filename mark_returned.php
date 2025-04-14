@@ -8,8 +8,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hold_id'])) {
     include("config.php");
 
-    $hold_id = intval($_POST['hold_id']); // Sanitize input
-
+    $hold_id = intval($_POST['hold_id']); 
+    
     // Update the record in the `book_holds` table to mark it as returned
     $stmt = $db->prepare("UPDATE book_holds SET return_status = 'returned' WHERE id = ?");
     $stmt->bind_param('i', $hold_id);

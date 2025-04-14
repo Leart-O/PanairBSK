@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("config.php"); // Include the database connection
+include("config.php"); 
 
 // Fetch all books or filter by category
 $category = isset($_GET['category']) ? $_GET['category'] : '';
@@ -15,7 +15,7 @@ $result = $db->query($query);
 <div class="container mt-5">
     <h1 class="text-center text-primary mb-4">Librat</h1>
 
-    <!-- Category Filter -->
+    <!-- Categories -->
     <div class="mb-4 text-center">
         <a href="books.php" class="btn btn-outline">Të gjitha</a>
         <a href="books.php?category=Klasa+1-5" class="btn btn-outline">Klasa 1-5</a>

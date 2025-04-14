@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hold_id'])) {
     include("config.php");
 
-    $hold_id = intval($_POST['hold_id']); // Sanitize input
+    $hold_id = intval($_POST['hold_id']); 
 
     // Delete the record from the `book_holds` table
     $stmt = $db->prepare("DELETE FROM book_holds WHERE id = ?");

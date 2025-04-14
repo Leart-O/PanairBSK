@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
     $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
     if ($stmt->execute()) {
-        // Set session variables
+
         $_SESSION['user_id'] = $db->insert_id;
         $_SESSION['role'] = 'student';
 

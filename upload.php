@@ -4,7 +4,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
     exit;
 }
-include("config.php"); // Include the database connection
+include("config.php"); 
 ?>
 
 <?php include("header.php"); ?>

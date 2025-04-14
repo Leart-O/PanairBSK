@@ -6,14 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     include("config.php");
 
-    // Check user credentials
+
     $stmt = $db->prepare("SELECT id, password, role FROM users WHERE name = ?");
     $stmt->bind_param('s', $name);
     $stmt->execute();
     $stmt->bind_result($id, $hashed_password, $role);
     if ($stmt->fetch()) {
         if (password_verify($password, $hashed_password)) {
-            // Set session variables
             $_SESSION['user_id'] = $id;
             $_SESSION['role'] = $role;
 

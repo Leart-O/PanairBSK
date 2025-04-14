@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("config.php"); // Include the database connection
+include("config.php"); 
 
 // Fetch the 4 newest books
 $result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat ORDER BY id DESC LIMIT 4");
