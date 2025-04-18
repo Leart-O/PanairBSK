@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+<!-- Loading Animation -->
+<div id="loading">
+    <div class="spinner"></div>
+</div>
+
 <header>
 
 
@@ -44,3 +50,5 @@
     </div>
     
 </header>
+</body>
+</html>
