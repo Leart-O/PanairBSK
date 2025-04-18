@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 include("config.php"); 
@@ -345,17 +347,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     </footer>
 </div>
  <script src="main.js"></script>
- <script>
-    // Hide loading animation after 2 seconds
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const loading = document.getElementById('loading');
-            if (loading) {
-                loading.style.display = 'none';
-            }
-        }, 2000); // 2 seconds
-    });
-</script>
    
  <?php include("footer.php");?>
 
+ 

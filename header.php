@@ -82,5 +82,17 @@
     </div>
     
 </header>
+
+<script>
+    // Hide loading animation after page load
+    window.addEventListener('load', () => {
+        const loading = document.getElementById('loading');
+        if (loading) {
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 500); // 2 seconds
+        }
+    });
+</script>
 </body>
 </html>
