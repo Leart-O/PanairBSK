@@ -25,8 +25,8 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     <section class="search-section">
         <div class="container">
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Kërko librat, autorët, ose ISBN...">
-                <button class="search-btn"><i class="fas fa-search"></i> Kërko</button>
+                <input type="text" class="search-input" placeholder="Search for books, authors, or ISBNs...">
+                <button class="search-btn"><i class="fas fa-search"></i>Search</button>
             </div>
             <div class="search-filters">
                 <span class="filter-tag active">Home</span>
@@ -118,7 +118,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                         <i class="fas fa-user-graduate"></i>
                     </div>
                     <h3>Grades 6-9</h3>
-                    <p class="category-count">30+ Books</p>
+                    <p class="category-count">12+ Books</p>
                 </a>
 
                 <a href="books.php?category=Klasa+10-12" class="category-card">
@@ -126,7 +126,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h3>Grades 10-12</h3>
-                    <p class="category-count">450+ Books</p>
+                    <p class="category-count">8+ Books</p>
                 </a>
 
                 <a href="books.php?category=Fantazi" class="category-card">
@@ -134,7 +134,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                         <i class="fas fa-atom"></i>
                     </div>
                     <h3>Thriller</h3>
-                    <p class="category-count">180+ Books</p>
+                    <p class="category-count">9+ Books</p>
                 </a>
 
                 <a href="books.php?category=Dramë" class="category-card">
@@ -142,7 +142,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                         <i class="fas fa-landmark"></i>
                     </div>
                     <h3>Romance</h3>
-                    <p class="category-count">120+ Books</p>
+                    <p class="category-count">8+ Books</p>
                 </a>
 
                 <a href="books.php?category=Aventurë" class="category-card">
@@ -150,7 +150,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                         <i class="fas fa-book-reader"></i>
                     </div>
                     <h3>Poetry</h3>
-                    <p class="category-count">250+ Books</p>
+                    <p class="category-count">9++ Books</p>
                 </a>
             </div>
         </div>
@@ -287,7 +287,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
             <p>Sign up to receive the latest notifications about our offers and innovations</p>
 
             <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Shkruani email-in tuaj" required>
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
                 <button type="submit" class="newsletter-btn">Subscribe</button>
             </form>
         </div>
