@@ -1,3 +1,6 @@
+
+
+
 // Mobile Menu Toggle
  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
  const navLinks = document.getElementById('navLinks');
@@ -152,12 +155,4 @@
 
 
 
-  function switchLanguage(language) {
-    if (language === 'shqip') {
-      // Qëndro në indeksin aktual
-      window.location.href = 'index.html';
-    } else if (language === 'anglisht') {
-      // Kalim në indeksin anglisht
-      window.location.href = 'index_en.html';
-    }
-  }
+

@@ -172,6 +172,7 @@ ul {
 }
 
 /* ===== HEADER & NAVIGATION ===== */
+
 header {
     position: fixed;
     top: 0;
@@ -185,9 +186,10 @@ header {
 
 .header-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Siguron që elementët të jenë në të djathtë */
     align-items: center;
     padding: 15px 0;
+    gap: 10px; /* Hapësirë midis grupeve të elementeve */
 }
 
 .logo {
@@ -196,10 +198,12 @@ header {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary);
+    margin-right: auto; /* Siguron që logoja të jetë në të majtë */
 }
 
 .logo img {
-    height: 50px;
+    height: auto; /* Ktheje në madhësi normale */
+    max-height: 50px; /* Kufizo lartësinë maksimale për të ruajtur proporcionet */
     margin-right: 10px;
 }
 
@@ -210,17 +214,20 @@ header {
 .nav-links {
     display: flex;
     align-items: center;
+    gap: 10px; /* Hapësirë midis "Hyr" dhe "Regjistrohu" */
+    margin: 0; /* Hiq çdo hapësirë të panevojshme */
 }
 
 .nav-links li {
-    margin-left: 1.5rem;
+    margin-left: 0; /* Remove extra spacing between list items */
     position: relative;
 }
 
 .nav-links a {
     color: var(--dark);
     font-weight: 600;
-    padding: 0.5rem 0;
+    padding: 0.3rem 0.5rem; /* Adjust padding for better alignment */
+    font-size: 0.9rem; /* Optional: Adjust font size */
     position: relative;
 }
 
@@ -241,6 +248,14 @@ header {
 
 .nav-links a.active {
     color: var(--secondary);
+}
+
+.language-switch {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Hapësirë midis AL dhe EN */
+    margin-left: 10px; /* Afrojeni me nav-links */
+    padding: 0; /* Hiq padding-in e panevojshëm */
 }
 
 .dropdown {
@@ -972,7 +987,6 @@ header {
 .social-links {
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
 }
 
 .social-links a {
@@ -1497,3 +1511,10 @@ h1.text-primary {
 .alert-dismissible .btn-close:hover {
     opacity: 1;
 }
+
+
+
+
+
+
+

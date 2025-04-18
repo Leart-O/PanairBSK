@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 include("config.php"); 
@@ -36,6 +38,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
 
                 <a href="books.php?category=Klasa+10-12" class="filter-tag">Klasa 10-12</a>
 
+                <a href="books.php" class="filter-tag">Të tjerat</a>
                
             </div>
         </div>
@@ -130,7 +133,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <div class="category-icon">
                         <i class="fas fa-atom"></i>
                     </div>
-                    <h3>Fantazi</h3>
+                    <h3>Thriller</h3>
                     <p class="category-count">180+ libra</p>
                 </a>
 
@@ -138,7 +141,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <div class="category-icon">
                         <i class="fas fa-landmark"></i>
                     </div>
-                    <h3>Dramë</h3>
+                    <h3>Romancë</h3>
                     <p class="category-count">120+ libra</p>
                 </a>
 
@@ -146,7 +149,7 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <div class="category-icon">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <h3>Aventurë</h3>
+                    <h3>Poezia</h3>
                     <p class="category-count">250+ libra</p>
                 </a>
             </div>
@@ -340,8 +343,11 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                 <p>&copy; 2023 Biblioteka Shkollore Online. Të gjitha të drejtat e rezervuara.</p>
             </div>
         </div>
+
     </footer>
 </div>
  <script src="main.js"></script>
    
  <?php include("footer.php");?>
+
+ 

@@ -21,10 +21,10 @@ $result = $db->query($query);
         <a href="books.php?category=Klasa+1-5" class="btn btn-outline">Klasa 1-5</a>
         <a href="books.php?category=Klasa+6-9" class="btn btn-outline">Klasa 6-9</a>
         <a href="books.php?category=Klasa+10-12" class="btn btn-outline">Klasa 10-12</a>
-        <a href="books.php?category=Fantazi" class="btn btn-outline">Fantazi</a>
-        <a href="books.php?category=Dramë" class="btn btn-outline">Dramë</a>
-        <a href="books.php?category=Aventurë" class="btn btn-outline">Aventurë</a>
-        <a href="books.php?category=Mister" class="btn btn-outline">Mister</a>
+        <a href="books.php?category=Fantazi" class="btn btn-outline">Thriller</a>
+        <a href="books.php?category=Dramë" class="btn btn-outline">Romancë</a>
+        <a href="books.php?category=Aventurë" class="btn btn-outline">Poezia</a>
+        <a href="books.php?category=Mister" class="btn btn-outline">Klasikët</a>
     </div>
 
     <!-- Books Grid -->

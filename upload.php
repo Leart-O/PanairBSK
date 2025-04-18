@@ -32,10 +32,10 @@ include("config.php");
                         <option value="Klasa 1-5">Klasa 1-5</option>
                         <option value="Klasa 6-9">Klasa 6-9</option>
                         <option value="Klasa 10-12">Klasa 10-12</option>
-                        <option value="Fantazi">Fantazi</option>
-                        <option value="Dramë">Dramë</option>
-                        <option value="Aventurë">Aventurë</option>
-                        <option value="Mister">Mister</option>
+                        <option value="Fantazi">Thriller</option>
+                        <option value="Dramë">Romancë</option>
+                        <option value="Aventurë">Poezia</option>
+                        <option value="Mister">Klasikët</option>
                     </select>
                 </div>
                 <div class="mb-3">

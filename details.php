@@ -104,44 +104,25 @@ if (!empty($_GET['id'])) {
 
 <br><br><br><br>
 
- <!-- Footer -->
- <footer>
+  <!-- Footer -->
+  <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <div id="kontakt"></div>
                     <h3>Rreth nesh</h3>
-                    <p>Biblioteka Shkollore Online është platforma kryesore për blerjen e librave arsimorë në Kosovë. Misioni ynë është të bëjmë arsimin më të arritshëm për të gjithë.</p>
+                    <p>Biblioteka Shkollore Online është platforma kryesore për huazimin e librave arsimorë brenda shkolles.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://britishschoolkosova.com/"><i class="fa fa-globe"></i></a>
+                        <a href="https://www.facebook.com/BritishSchoolKosova/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/thebritishschoolofkosova/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/bsk-the-british-school-of-kosova-a2b5051a5"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
 
-                <div class="footer-col">
-                    <h3>Linqe të shpejta</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Kryefaqja</a></li>
-                        <li><a href="about.html">Rreth nesh</a></li>
-                        <li><a href="books.html">Të gjithë librat</a></li>
-                        <li><a href="new-books.html">Libra të rinj</a></li>
-                        <li><a href="offers.html">Oferta</a></li>
-                        <li><a href="contact.html">Kontakt</a></li>
-                    </ul>
-                </div>
 
                 <div class="footer-col">
-                    <h3>Klasat</h3>
-                    <ul class="footer-links">
-                        <li><a href="grade1-4.html">Klasa 1-4</a></li>
-                        <li><a href="grade5-8.html">Klasa 5-8</a></li>
-                        <li><a href="grade9-12.html">Klasa 9-12</a></li>
-                        <li><a href="mathematics.html">Matematikë</a></li>
-                        <li><a href="language.html">Gjuhë Shqipe</a></li>
-                        <li><a href="science.html">Shkencë</a></li>
-                    </ul>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2935.012643531661!2d21.10708847661339!3d42.639891917375856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13549e09a30ff837%3A0xd43d44deb9fe3567!2sThe%20British%20School%20of%20Kosova!5e0!3m2!1sen!2s!4v1744883171335!5m2!1sen!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <div class="footer-col">
@@ -149,19 +130,19 @@ if (!empty($_GET['id'])) {
                     <ul class="footer-contact">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Rruga e Arsimit, Nr. 15, Prishtinë, Kosovë</span>
+                            <span>Rr Aleks Çaçi, Fushë Kosovë</span>
                         </li>
                         <li>
                             <i class="fas fa-phone-alt"></i>
-                            <span>+383 44 123 456</span>
+                            <span> +383 48 999 172 / 173</span>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>info@bibliotekashkollore.com</span>
+                            <span>info@britishschoolkosova.com</span>
                         </li>
                         <li>
                             <i class="fas fa-clock"></i>
-                            <span>E Hënë - E Premte: 08:00 - 20:00<br>E Shtunë: 09:00 - 15:00</span>
+                            <span>E Hënë - E Premte: 08:00 - 16:00</span>
                         </li>
                     </ul>
                 </div>
@@ -175,4 +156,6 @@ if (!empty($_GET['id'])) {
         </div>
     </footer>
 </div>
-<?php include("footer.php"); ?>
+ <script src="main.js"></script>
+   
+ <?php include("footer.php");?>
