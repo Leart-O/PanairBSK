@@ -35,6 +35,7 @@
                     <li><a href="login.php">Hyr</a></li>
                 <?php endif; ?>
             </ul>
+  
         </div>
     </div>
 </header>
