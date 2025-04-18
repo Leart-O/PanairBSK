@@ -28,9 +28,14 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
             </div>
             <div class="search-filters">
                 <span class="filter-tag active">Ballina</span>
-                <span class="filter-tag">Klasa 1-5</span>
-                <span class="filter-tag">Klasa 6-9</span>
-                <span class="filter-tag">Klasa 10-12</span>
+               
+
+                <a href="books.php?category=Klasa+1-5" class="filter-tag">Klasa 1-5</a>
+
+                <a href="books.php?category=Klasa+6-9" class="filter-tag">Klasa 6-9</a>
+
+                <a href="books.php?category=Klasa+10-12" class="filter-tag">Klasa 10-12</a>
+
                
             </div>
         </div>
@@ -47,10 +52,10 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
         
                 <div class="feature-card animate slideInUp delay-3">
                     <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
+                        <i class="fas fa-book"></i>
                     </div>
-                    <h3>Mbështetje per te gjith nxensit Ndreqe...</h3>
-                    <p>Ekipi ynë është gjithmonë i gatshëm t'ju ndihmojë.</p>
+                    <h3>Biblioteka e The British School of Kosova ka shumëllojshmëri te librave.</h3>
+                    <p>Zgjedhjet e shumëta nga kategori të ndryshme mundësojnë që nxënësit të kenë akses në njohuri të pakufijtë.</p>
                 </div>
             </div>
         </div>
@@ -152,58 +157,65 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     <section class="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>Çfarë thonë klientët tanë</h2>
-                <p>Opinione të vërteta nga nxënësit dhe prindërit</p>
+                
+                <p>Opinione nga nxënësit</p>
             </div>
 
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        <p>Biblioteka më e mirë online për libra shkollorë! Kam gjetur gjithçka që më duhej për klasën time me çmime shumë të volitshme.</p>
+                        <br>
+                        <p>Platforma e bibliotekës na ndihmon të zgjerim horizontet tona dhe të gjejmë burime që nuk mund t'i gjejmë lehtësisht diku tjetër.</p>
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Klient">
-                        </div>
                         <div class="author-info">
                             <h4>Loris Geci</h4>
-                            <p>Nxënëse, Klasa 8</p>
+                            <p>Nxënës, Klasa 10</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        <p>Shërbim i shkëlqyeshëm dhe dërgesë shumë e shpejtë. Librat erdhën në kushte të përkryera dhe me pakicë më të lirë se në librari.</p>
+                        <br>
+                        <p>Falë bibliotekës digjitale, mësimet bëhen më interesante dhe mund të qasemi në libra dhe materiale që e bëjnë mësimin më të thjeshtë.</p>
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Klient">
-                        </div>
                         <div class="author-info">
                             <h4>Mendim Shoshi</h4>
-                            <p>Prind</p>
+                            <p>Nxënës, Klasa 10</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        <p>Si mësues, e vlerësoj shumë koleksionin e gjerë të librave arsimorë. Gjithmonë gjej atë që më nevojitet për orët e mia.</p>
+                        <br>
+                        <p>Biblioteka është një mundësi e shkëlqyer për të eksploruar dijen dhe për të zhvilluar aftësitë tona, duke pasur gjithmonë burimet e duhura në duar.</p>
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Klient">
+                        <div class="author-info">
+                            <h4>Arita Maxhuni</h4>
+                            <p>Nxënës, Klasa 10</p>
                         </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <br>
+                        <p>Me platformën e bibliotekës, çdo nxënës ka mundësinë të mësojë në mënyrë të pavarur dhe të thellojë njohuritë në çdo lëndë.</p>
+                    </div>
+                    <div class="testimonial-author">
                         <div class="author-info">
                             <h4>Leart Obertinca</h4>
-                            <p>Mësuese</p>
+                            <p>Nxënës, Klasa 10</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
 
     <!-- Stats Section -->
 
@@ -215,50 +227,50 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                 <h2>Lajme dhe Artikuj</h2>
                 <p>Lexoni artikujt tanë më të fundit rreth arsimit dhe librave</p>
             </div>
-
+            <a href="https://britishschoolkosova.com/lajmet/" class="view-all" style="margin-left: 1180px">Shiko më shumë <i class="fas fa-arrow-right"></i></a>
             <div class="blog-grid">
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                        <img src="https://britishschoolkosova.com/wp-content/uploads/2023/03/9.jpg" alt="Blog post">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
                             <span><i class="far fa-calendar-alt"></i> 15 Maj 2023</span>
                             <span><i class="far fa-eye"></i> 1.2K</span>
                         </div>
-                        <h3 class="blog-title">Si të zgjedhësh librat e duhur për vitin e ri shkollor</h3>
-                        <p class="blog-excerpt">Një udhëzues i thjeshtë për prindërit dhe nxënësit për të zgjedhur librat më të përshtatshëm për nevojat e tyre arsimore...</p>
-                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="blog-title">Në BSK shënohet Dita e Poezisë</h3>
+                        <p class="blog-excerpt">Poezia është pikturë që dëgjohet” – ishin fjalët e Leonardo da Vinҁit me të cilën filloi “Ora e Poezisë” në BSK. E shenjuar në kuadër Ditës së Poezisë, kjo ngjarje mblodhi nxënës, profesorë, poetë dhe familje të poetëve tashmë të ndjerë.</p>
+                        <a href="https://britishschoolkosova.com/ne-bsk-shenohet-dita-e-poezise/" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                        <img src="https://britishschoolkosova.com/wp-content/uploads/2023/02/5-2-1-scaled.jpg" alt="Blog post">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="far fa-calendar-alt"></i> 2 Qershor 2023</span>
+                            <span><i class="far fa-calendar-alt"></i>24 Mars 2023</span>
                             <span><i class="far fa-eye"></i> 890</span>
                         </div>
-                        <h3 class="blog-title">Rëndësia e leximit në zhvillimin e fëmijëve</h3>
-                        <p class="blog-excerpt">Studime tregojnë se fëmijët që lexojnë rregullisht kanë përfitime të mëdha në zhvillimin intelektual dhe emocional...</p>
-                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="blog-title">Punime rreth dizajnit të enterierit dhe eksterierit.</h3>
+                        <p class="blog-excerpt">Sot, nxënësit e klasave të 8-ta të The British School of Kosova, punuan punime të dizajnit të enterierit dhe eksterierit. Ata mësuan si të bëjnë matjet, dizajnimin me vija dhe zhvilluan imagjinatën e tyre në një projekt arkitektural.</p>
+                        <a href="https://britishschoolkosova.com/punime-rreth-dizajnit-te-interierit-dhe-eksterierit/" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <div class="blog-card">
                     <div class="blog-img">
-                        <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog post">
+                        <img src="https://britishschoolkosova.com/wp-content/uploads/2023/02/Matematika-0.jpg" alt="Blog post">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
                             <span><i class="far fa-calendar-alt"></i> 20 Qershor 2023</span>
                             <span><i class="far fa-eye"></i> 1.5K</span>
                         </div>
-                        <h3 class="blog-title">Top 10 librat më të kërkuar për Abiturientët</h3>
-                        <p class="blog-excerpt">Lista jonë e librave më të kërkuar për studentët e klasës së 12-të që po përgatiten për provimet e maturës...</p>
-                        <a href="#" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
+                        <h3 class="blog-title">Aktivitet në kuadër të lëndës së Matematikës</h3>
+                        <p class="blog-excerpt">Në kuadër të lëndës së Matematikës me nxënësit e klasës së dhjetë ndërkombëtare është zhvilluar aktiviteti “Paraqitja gjeometrike e numrave iracionalë’’. Një numër iracional është një numër që nuk mund të shprehet si raport i dy numrave të plotë. Nëse shkruhet si numër decimal, atëherë ai është me pafund shifra pas presjes dhjetore të cilat përsëriten pa ndonjë rregull të caktuar.</p>
+                        <a href="https://britishschoolkosova.com/aktivitet-ne-kuader-te-lendes-se-matematikes/" class="read-more">Lexo më shumë <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -285,37 +297,18 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                 <div class="footer-col">
                     <div id="kontakt"></div>
                     <h3>Rreth nesh</h3>
-                    <p>Biblioteka Shkollore Online është platforma kryesore për blerjen e librave arsimorë në Kosovë. Misioni ynë është të bëjmë arsimin më të arritshëm për të gjithë.</p>
+                    <p>Biblioteka Shkollore Online është platforma kryesore për huazimin e librave arsimorë brenda shkolles.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://britishschoolkosova.com/"><i class="fa fa-globe"></i></a>
+                        <a href="https://www.facebook.com/BritishSchoolKosova/"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/thebritishschoolofkosova/?hl=en"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/bsk-the-british-school-of-kosova-a2b5051a5"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
 
-                <div class="footer-col">
-                    <h3>Linqe të shpejta</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Kryefaqja</a></li>
-                        <li><a href="about.html">Rreth nesh</a></li>
-                        <li><a href="books.html">Të gjithë librat</a></li>
-                        <li><a href="new-books.html">Libra të rinj</a></li>
-                        <li><a href="offers.html">Oferta</a></li>
-                        <li><a href="contact.html">Kontakt</a></li>
-                    </ul>
-                </div>
 
                 <div class="footer-col">
-                    <h3>Klasat</h3>
-                    <ul class="footer-links">
-                        <li><a href="grade1-4.html">Klasa 1-4</a></li>
-                        <li><a href="grade5-8.html">Klasa 5-8</a></li>
-                        <li><a href="grade9-12.html">Klasa 9-12</a></li>
-                        <li><a href="mathematics.html">Matematikë</a></li>
-                        <li><a href="language.html">Gjuhë Shqipe</a></li>
-                        <li><a href="science.html">Shkencë</a></li>
-                    </ul>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2935.012643531661!2d21.10708847661339!3d42.639891917375856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13549e09a30ff837%3A0xd43d44deb9fe3567!2sThe%20British%20School%20of%20Kosova!5e0!3m2!1sen!2s!4v1744883171335!5m2!1sen!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <div class="footer-col">
@@ -323,19 +316,19 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
                     <ul class="footer-contact">
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Rruga e Arsimit, Nr. 15, Prishtinë, Kosovë</span>
+                            <span>Rr Aleks Çaçi, Fushë Kosovë</span>
                         </li>
                         <li>
                             <i class="fas fa-phone-alt"></i>
-                            <span>+383 44 123 456</span>
+                            <span> +383 48 999 172 / 173</span>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>info@bibliotekashkollore.com</span>
+                            <span>info@britishschoolkosova.com</span>
                         </li>
                         <li>
                             <i class="fas fa-clock"></i>
-                            <span>E Hënë - E Premte: 08:00 - 20:00<br>E Shtunë: 09:00 - 15:00</span>
+                            <span>E Hënë - E Premte: 08:00 - 16:00</span>
                         </li>
                     </ul>
                 </div>

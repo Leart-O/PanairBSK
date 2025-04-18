@@ -148,3 +148,16 @@
 
  window.addEventListener('scroll', checkAnimation);
  window.addEventListener('load', checkAnimation);
+
+
+
+
+  function switchLanguage(language) {
+    if (language === 'shqip') {
+      // Qëndro në indeksin aktual
+      window.location.href = 'index.html';
+    } else if (language === 'anglisht') {
+      // Kalim në indeksin anglisht
+      window.location.href = 'index_en.html';
+    }
+  }
