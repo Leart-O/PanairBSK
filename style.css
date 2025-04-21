@@ -335,6 +335,43 @@ header {
     cursor: pointer;
 }
 
+/* ===== NAVIGATION MOBILE ===== */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 80px);
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 0 0 1.5rem 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0;
+        display: block;
+        width: 100%;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+}
 
 /* ===== HERO SECTION ===== */
 .hero {
@@ -1333,6 +1370,41 @@ header {
 }
 
 @media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 80px);
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 0 0 1.5rem 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0;
+        display: block;
+        width: 100%;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
     .hero {
         padding: 100px 0;
         background-attachment: scroll;
@@ -1376,6 +1448,54 @@ header {
 
     .cart-sidebar {
         max-width: 100%;
+    }
+
+    .books-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .book-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-img img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .book-info {
+        margin-top: 10px;
+    }
+
+    .book-title {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .book-author {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .book-status {
+        font-size: 0.9rem;
+        color: #777;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 10px 15px;
+        font-size: 1rem;
     }
 }
 

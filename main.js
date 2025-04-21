@@ -155,4 +155,27 @@
 
 
 
+ const form = document.getElementById("npsform");
 
+/**
+ * Multi-step Function to navigate
+ */
+
+const navigateToFormStep = (stepNumber) => {
+  form.querySelectorAll(".step").forEach((el) => {
+    el.classList.add("hidden");
+  });
+
+  form.querySelector("#step" + stepNumber).classList.remove("hidden");
+};
+
+/**
+ * Enable Navigation buttons
+ */
+
+form.querySelectorAll(".navigate").forEach((nav) => {
+  nav.addEventListener("click", () => {
+    const stepNumber = parseInt(nav.getAttribute("data-step"));
+    navigateToFormStep(stepNumber);
+  });
+});

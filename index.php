@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 include("config.php"); 
@@ -22,12 +20,15 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     </section>
 
     <!-- Search Section -->
-    <section class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Kërko librat, autorët, ose ISBN...">
-                <button class="search-btn"><i class="fas fa-search"></i> Kërko</button>
-            </div>
+  <!-- Search Form -->
+<section class="search-section">
+    <div class="container">
+        <form method="GET" action="search.php" class="search-container">
+            <input type="text" name="kerko" class="search-input" placeholder="Kërko librat, autorët, ose ISBN..." required>
+            <button type="submit" class="search-btn"><i class="fas fa-search"></i> Kërko</button>
+        </form>
+    </div>
+</section>
             <div class="search-filters">
                 <span class="filter-tag active">Ballina</span>
                
@@ -344,10 +345,14 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
             </div>
         </div>
 
+        <ul class="nav-links" id="navLinks">
+            <li><a href="login.php">Hyr</a></li>
+            <li><a href="signup.php">Regjistrohu</a></li>
+        </ul>
+
     </footer>
 </div>
  <script src="main.js"></script>
    
  <?php include("footer.php");?>
 
- 

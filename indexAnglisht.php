@@ -24,10 +24,15 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     <!-- Search Section -->
     <section class="search-section">
         <div class="container">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search for books, authors, or ISBNs...">
-                <button class="search-btn"><i class="fas fa-search"></i>Search</button>
-            </div>
+        <!-- Search Form -->
+<section class="search-section">
+    <div class="container">
+        <form method="GET" action="searchAnglisht.php" class="search-container">
+            <input type="text" name="kerko" class="search-input" placeholder="Kërko librat, autorët, ose ISBN..." required>
+            <button type="submit" class="search-btn"><i class="fas fa-search"></i> Kërko</button>
+        </form>
+    </div>
+</section>
             <div class="search-filters">
                 <span class="filter-tag active">Home</span>
                
