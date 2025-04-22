@@ -90,7 +90,7 @@
         if (loading) {
             setTimeout(() => {
                 loading.style.display = 'none';
-            }, 500); // 2 seconds
+            }, 1000); // 2 seconds
         }
     });
 </script>

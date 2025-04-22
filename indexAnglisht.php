@@ -24,7 +24,6 @@ $result = $db->query("SELECT id, title, author, foto, total_books, available_boo
     <!-- Search Section -->
     <section class="search-section">
         <div class="container">
-        <!-- Search Form -->
 <section class="search-section">
     <div class="container">
         <form method="GET" action="searchAnglisht.php" class="search-container">
