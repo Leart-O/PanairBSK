@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 include("config.php");
 
 // Fetch held books
-$result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh.hold_date, bh.pickup_date, bh.return_status 
+$result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.email, l.title, bh.hold_date, bh.pickup_date, bh.return_status 
                       FROM book_holds bh
                       JOIN users u ON bh.user_id = u.id
                       JOIN librat l ON bh.book_id = l.id");
@@ -42,7 +42,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
             <thead class="table-dark">
                 <tr>
                     <th>Emri i Studentit</th>
-                    <th>Kartela ID</th>
+                    <th>Email</th>
                     <th>Titulli i Librit</th>
                     <th>Data e rezervimit</th>
                     <th>Data e tërheqjes</th>
@@ -54,7 +54,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.kartela_id, l.title, bh
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo $row['name'] . ' ' . $row['mbiemri']; ?></td>
-                        <td><?php echo $row['kartela_id']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['title']; ?></td>
                         <td><?php echo $row['hold_date']; ?></td>
                         <td><?php echo $row['pickup_date']; ?></td>

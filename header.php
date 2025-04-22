@@ -4,15 +4,22 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include("config.php"); // Lidhja me bazën e të dhënave
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $mbiemri = $_POST['mbiemri'];
-    $kartela_id = $_POST['kartela_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_type']) && $_POST['form_type'] === 'registration') {
+    // Validate input
+    $name = isset($_POST['name']) ? trim($_POST['name']) : null;
+    $password = isset($_POST['password']) ? password_hash(trim($_POST['password']), PASSWORD_DEFAULT) : null;
+    $mbiemri = isset($_POST['mbiemri']) ? trim($_POST['mbiemri']) : null;
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+
+    // Check if any field is missing
+    if (!$name || !$password || !$mbiemri || !$email) {
+        echo "<p style='color: red;'>All fields are required.</p>";
+        exit;
+    }
 
     // Shto përdoruesin në tabelën `users`
-    $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
-    $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
+    $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, email) VALUES (?, ?, 'student', ?, ?)");
+    $stmt->bind_param('ssss', $name, $password, $mbiemri, $email);
 
     if ($stmt->execute()) {
         // Ruaj të dhënat e përdoruesit në sesion
@@ -25,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Log error për debugging
         error_log("Error: " . $stmt->error);
-        echo "Error: " . $stmt->error;
+        echo "<p style='color: red;'>Error: " . $stmt->error . "</p>";
     }
 
     $stmt->close();

@@ -179,3 +179,17 @@ form.querySelectorAll(".navigate").forEach((nav) => {
     navigateToFormStep(stepNumber);
   });
 });
+
+
+
+function validateEmail() {
+    const emailInput = document.getElementById('email').value;
+    const allowedDomain = "@britishschoolkosova.com";
+
+    if (emailInput.endsWith(allowedDomain)) {
+        return true; // Lejohet
+    } else {
+        alert("Ju lutem përdorni një email që përfundon me @britishschoolkosova.com");
+        return false; // Ndalo dërgimin e formës
+    }
+}

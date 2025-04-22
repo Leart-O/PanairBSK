@@ -25,11 +25,17 @@ if (!empty($_GET['id'])) {
         }
 
         $user_id = $_SESSION['user_id'];
-        $pickup_date = $_POST['pickup_date'];
+        $pickup_date = isset($_POST['pickup_date']) ? trim($_POST['pickup_date']) : null;
+
+        if (!$pickup_date) {
+            echo "<p style='color: red;'>Pickup date is required.</p>";
+            exit;
+        }
 
         // Insert into `book_holds` table
         $stmt = $db->prepare("INSERT INTO book_holds (user_id, book_id, hold_date, pickup_date) VALUES (?, ?, CURDATE(), ?)");
         $stmt->bind_param('iis', $user_id, $id, $pickup_date);
+
         if ($stmt->execute()) {
             // Decrease available_books in `librat` table
             $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
