@@ -38,12 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mbiemri = $_POST['mbiemri'];
     $kartela_id = $_POST['kartela_id'];
 
-
     // Insert student into the `users` table
     $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
     $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
-    if ($stmt->execute()) {
 
+    if ($stmt->execute()) {
         $_SESSION['user_id'] = $db->insert_id;
         $_SESSION['role'] = 'student';
 
@@ -51,8 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: index.php');
         exit;
     } else {
+        // Log the error for debugging
+        error_log("Error: " . $stmt->error);
         echo "Error: " . $stmt->error;
     }
+
     $stmt->close();
     $db->close();
 }

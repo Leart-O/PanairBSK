@@ -1,3 +1,37 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include("config.php"); // Lidhja me bazën e të dhënave
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $mbiemri = $_POST['mbiemri'];
+    $kartela_id = $_POST['kartela_id'];
+
+    // Shto përdoruesin në tabelën `users`
+    $stmt = $db->prepare("INSERT INTO users (name, password, role, mbiemri, kartela_id) VALUES (?, ?, 'student', ?, ?)");
+    $stmt->bind_param('ssss', $name, $password, $mbiemri, $kartela_id);
+
+    if ($stmt->execute()) {
+        // Ruaj të dhënat e përdoruesit në sesion
+        $_SESSION['user_id'] = $db->insert_id;
+        $_SESSION['role'] = 'student';
+
+        // Ridrejto te index.php
+        header('Location: index.php');
+        exit;
+    } else {
+        // Log error për debugging
+        error_log("Error: " . $stmt->error);
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $db->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
