@@ -297,25 +297,55 @@ ul {
 }
 
 .language-switch {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: var(--muted);
-    font-size: 0.95rem;
+    position: relative;
+    display: grid;
+    flex: none;
+    grid-template-columns: 1fr 1fr;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background-color: var(--tint);
+    font-size: 0.875rem;
+}
+
+/* The navy pill behind the current language. Correct without JavaScript. */
+.lang-thumb {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    border-radius: 999px;
+    background-color: var(--navy);
+    box-shadow: 0 2px 6px rgba(13, 33, 69, 0.3);
+}
+
+html[lang="en"] .lang-thumb {
+    transform: translateX(100%);
 }
 
 .language-switch a {
-    padding: 0.25rem;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 32px;
+    border-radius: 999px;
     color: var(--muted);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    transition: color 0.18s ease;
 }
 
-.language-switch a.active {
+.language-switch a:hover {
     color: var(--navy);
-    text-decoration: underline;
-    text-decoration-color: var(--gold);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
+}
+
+.language-switch a.active,
+.language-switch a.active:hover {
+    color: #fff;
 }
 
 .mobile-menu-btn {
@@ -1271,6 +1301,113 @@ main {
     height: 96px;
 }
 
+/* ===== Language page turn (motion.js) =====
+   Leaving: the real page swings away from its left edge, showing this title page behind it.
+   Arriving: the title page covers the new page from first paint, then turns the same way. */
+.page-turn {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    overflow: hidden;
+}
+
+.lang-turn-in .page-turn,
+.page-turn.is-active {
+    display: block;
+}
+
+html.lang-turn-out {
+    background-color: var(--navy-deep); /* Makes body paint its own background while it turns. */
+}
+
+html.lang-turn-out .page-turn {
+    z-index: 0;
+}
+
+html.lang-turn-out body {
+    position: relative;
+    z-index: 1;
+    backface-visibility: hidden;
+}
+
+.page-turn-shade {
+    position: absolute;
+    inset: 0;
+    background-color: var(--navy-deep);
+    opacity: 0.5;
+}
+
+/* While leaving, the shade is the old page's shadow falling on the title page. */
+html.lang-turn-out .page-turn-shade {
+    z-index: 1;
+}
+
+.page-turn-sheet {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    padding: clamp(16px, 3vw, 36px);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0) 7%), var(--navy-deep);
+    backface-visibility: hidden;
+}
+
+.page-turn-frame {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(242, 207, 133, 0.55);
+    outline: 1px solid rgba(242, 207, 133, 0.22);
+    outline-offset: -8px;
+    text-align: center;
+}
+
+.page-turn-school {
+    margin-bottom: 0.6rem;
+    color: var(--gold-soft);
+    font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.page-turn-word {
+    display: none;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 8vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.page-turn[data-show="sq"] [data-word="sq"],
+.page-turn[data-show="en"] [data-word="en"] {
+    display: block;
+}
+
+/* Light falling across a page as it lifts. */
+.page-turn-sheen,
+.page-turn-page-sheen {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(13, 33, 69, 0) 35%, rgba(13, 33, 69, 0.42));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.page-turn-sheen {
+    top: 0;
+    bottom: 0;
+}
+
+.page-turn-page-sheen {
+    z-index: 5000;
+}
+
 /* ===== Scroll progress ===== */
 .scroll-progress {
     position: absolute;
@@ -1317,6 +1454,7 @@ main {
 @media print {
     .site-header,
     .footer-map,
+    .page-turn,
     .book-journey,
     .process-decor {
         display: none !important;

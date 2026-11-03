@@ -12,6 +12,7 @@
 
     if (!window.gsap) {
         release();
+        root.classList.remove('lang-turn-in');
         return;
     }
 
@@ -33,6 +34,8 @@
     var CLEAR = 'opacity,visibility,transform,clipPath';
     var SVG_NS = 'http://www.w3.org/2000/svg';
     var motionOk = '(prefers-reduced-motion: no-preference)';
+    // The page intro waits until the title page has started to lift.
+    var introDelay = root.classList.contains('lang-turn-in') ? 0.4 : 0;
 
     // Reveal a group once it scrolls into view. If setup fails, the group is shown at once.
     function reveal(selector, from, to, stagger) {
@@ -105,7 +108,7 @@
         if (heroItems.length) {
             var title = hero.querySelector('h1');
             var rest = heroItems.filter(function (item) { return item !== title; });
-            gsap.timeline()
+            gsap.timeline({ delay: introDelay })
                 .from(rest[0], { opacity: 0, y: 10, duration: 0.4, clearProps: CLEAR })
                 .fromTo(title, { clipPath: 'inset(0 0 100% 0)', y: 24 }, { clipPath: 'inset(0 0 -20% 0)', y: 0, duration: 0.7, ease: 'power3.out', clearProps: CLEAR }, 0.05)
                 .from(rest.slice(1), { opacity: 0, y: 14, duration: 0.45, stagger: 0.07, clearProps: CLEAR }, 0.3);
@@ -115,7 +118,7 @@
             return heroItems.indexOf(item) === -1;
         });
         if (others.length) {
-            gsap.from(others, { opacity: 0, y: 14, duration: 0.5, stagger: 0.07, clearProps: CLEAR });
+            gsap.from(others, { opacity: 0, y: 14, duration: 0.5, stagger: 0.07, delay: introDelay, clearProps: CLEAR });
         }
 
         var alerts = gsap.utils.toArray('.alert');
@@ -129,6 +132,255 @@
         document.addEventListener('nav:open', onNavOpen);
         return function () {
             document.removeEventListener('nav:open', onNavOpen);
+        };
+    }
+
+    // ----- Language switch and page turn -----
+
+    function pagePerspective() {
+        // Keeps the lifting edge from passing the viewer on wide screens.
+        return Math.max(window.innerWidth * 2.2, 1800);
+    }
+
+    // Arriving: the title page covering the new page turns away.
+    function turnIn() {
+        var turn = document.getElementById('pageTurn');
+        if (!turn || !root.classList.contains('lang-turn-in')) {
+            return;
+        }
+        var sheet = turn.querySelector('.page-turn-sheet');
+        var shade = turn.querySelector('.page-turn-shade');
+        var sheen = turn.querySelector('.page-turn-sheen');
+
+        gsap.set(sheet, { transformPerspective: pagePerspective(), transformOrigin: '0% 50%' });
+        gsap.timeline({
+            delay: 0.15,
+            onComplete: function () {
+                root.classList.remove('lang-turn-in');
+                gsap.set([sheet, shade, sheen], { clearProps: 'all' });
+            }
+        })
+            .to(sheet, { rotationY: -100, duration: 0.7, ease: 'power2.inOut' }, 0)
+            .to(sheen, { opacity: 1, duration: 0.45, ease: 'power1.in' }, 0)
+            .to(shade, { opacity: 0, duration: 0.7, ease: 'power1.in' }, 0);
+    }
+
+    function languageSwitch() {
+        var control = document.getElementById('languageSwitch');
+        var thumb = control && control.querySelector('.lang-thumb');
+        if (!thumb) {
+            return function () {};
+        }
+
+        var links = gsap.utils.toArray('a', control);
+        var body = document.body;
+        var turn = document.getElementById('pageTurn');
+        var turnHome = turn ? turn.nextElementSibling : null;
+        var currentLang = root.lang === 'en' ? 'en' : 'sq';
+        var hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        var leaving = null;
+        var removers = [];
+
+        function listen(target, type, handler) {
+            target.addEventListener(type, handler);
+            removers.push(function () {
+                target.removeEventListener(type, handler);
+            });
+        }
+
+        function positionOf(lang) {
+            return lang === 'en' ? 100 : 0;
+        }
+
+        gsap.set(thumb, { x: 0, xPercent: positionOf(currentLang) });
+
+        // After a turn, the pill finishes its slide into the language that just arrived.
+        if (introDelay) {
+            gsap.fromTo(thumb, { xPercent: positionOf(currentLang === 'en' ? 'sq' : 'en') }, {
+                xPercent: positionOf(currentLang),
+                duration: 0.55,
+                delay: 0.5,
+                ease: 'back.out(1.8)'
+            });
+        }
+
+        // ----- Hover and keyboard focus: the pill leans towards the other language -----
+
+        function lean(link) {
+            var isCurrent = link.dataset.lang === currentLang;
+            gsap.to(link, { scale: 1.1, duration: 0.25, overwrite: 'auto' });
+            if (!isCurrent) {
+                gsap.to(link, { y: -1, duration: 0.25 });
+                gsap.to(thumb, { x: link.dataset.lang === 'en' ? 6 : -6, scaleX: 1.16, duration: 0.3, overwrite: 'auto' });
+            }
+        }
+
+        function settle(link) {
+            if (leaving) {
+                return;
+            }
+            gsap.to(link, { scale: 1, y: 0, duration: 0.35, overwrite: 'auto' });
+            gsap.to(thumb, { x: 0, scaleX: 1, scaleY: 1, duration: 0.6, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
+        }
+
+        links.forEach(function (link) {
+            if (hoverCapable) {
+                listen(link, 'pointerenter', function () { lean(link); });
+                listen(link, 'pointerleave', function () { settle(link); });
+            }
+            listen(link, 'focus', function () {
+                if (link.matches(':focus-visible')) {
+                    lean(link);
+                }
+            });
+            listen(link, 'blur', function () { settle(link); });
+        });
+
+        // The whole control drifts a little towards the pointer.
+        if (hoverCapable) {
+            var driftX = gsap.quickTo(control, 'x', { duration: 0.4 });
+            var driftY = gsap.quickTo(control, 'y', { duration: 0.4 });
+            listen(control, 'pointermove', function (event) {
+                var rect = control.getBoundingClientRect();
+                driftX(gsap.utils.clamp(-4, 4, (event.clientX - rect.left - rect.width / 2) * 0.1));
+                driftY(gsap.utils.clamp(-3, 3, (event.clientY - rect.top - rect.height / 2) * 0.15));
+            });
+            listen(control, 'pointerleave', function () {
+                driftX(0);
+                driftY(0);
+            });
+        }
+
+        // ----- Press: the control squashes, then springs back -----
+
+        function press() {
+            gsap.to(control, { scale: 0.92, duration: 0.1, overwrite: 'auto' });
+            gsap.to(thumb, { scaleY: 0.82, scaleX: 1.14, duration: 0.1, overwrite: 'auto' });
+        }
+
+        function unpress() {
+            gsap.to(control, { scale: 1, duration: 0.55, ease: 'elastic.out(1, 0.45)', overwrite: 'auto' });
+            if (!leaving) {
+                gsap.to(thumb, { scaleY: 1, scaleX: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
+            }
+        }
+
+        listen(control, 'pointerdown', press);
+        listen(window, 'pointerup', unpress);
+        listen(window, 'pointercancel', unpress);
+
+        // ----- Click: the pill slides across, then the real page turns away -----
+
+        function restore() {
+            if (!leaving) {
+                return;
+            }
+            clearTimeout(leaving.fallback);
+            leaving.timeline.kill();
+            leaving.sheen.remove();
+            leaving = null;
+
+            gsap.set(body, { clearProps: 'all' });
+            root.classList.remove('lang-turn-out');
+            turn.classList.remove('is-active');
+            turn.dataset.show = currentLang;
+            gsap.set(turn.querySelector('.page-turn-shade'), { clearProps: 'all' });
+            body.insertBefore(turn, turnHome);
+
+            links.forEach(function (link) {
+                link.classList.toggle('active', link.dataset.lang === currentLang);
+                gsap.set(link, { clearProps: 'transform' });
+            });
+            gsap.set(thumb, { x: 0, scaleX: 1, scaleY: 1, xPercent: positionOf(currentLang) });
+            try {
+                sessionStorage.removeItem('langTurn');
+            } catch (error) {}
+        }
+
+        function leaveTo(link) {
+            var targetLang = link.dataset.lang;
+            var href = link.href;
+            var gone = false;
+
+            function go() {
+                if (!gone) {
+                    gone = true;
+                    window.location.href = href;
+                }
+            }
+
+            try {
+                sessionStorage.setItem('langTurn', targetLang);
+            } catch (error) {
+                go();
+                return;
+            }
+
+            links.forEach(function (item) {
+                item.classList.toggle('active', item === link);
+            });
+            gsap.to(thumb, { xPercent: positionOf(targetLang), x: 0, scaleX: 1, scaleY: 1, duration: 0.32, ease: 'back.out(1.4)', overwrite: 'auto' });
+
+            // The title page moves outside body, because body itself is what turns.
+            turn.dataset.show = targetLang;
+            root.classList.add('lang-turn-out');
+            turn.classList.add('is-active');
+            root.appendChild(turn);
+
+            var viewportTop = window.pageYOffset;
+            var viewportHeight = window.innerHeight;
+            var pageSheen = document.createElement('div');
+            pageSheen.className = 'page-turn-page-sheen';
+            pageSheen.style.top = viewportTop + 'px';
+            pageSheen.style.height = viewportHeight + 'px';
+            body.appendChild(pageSheen);
+
+            gsap.set(body, {
+                transformPerspective: pagePerspective(),
+                transformOrigin: '0px ' + (viewportTop + viewportHeight / 2) + 'px'
+            });
+
+            leaving = {
+                sheen: pageSheen,
+                // Reaches the next page even if the animation is interrupted.
+                fallback: setTimeout(go, 1300),
+                timeline: gsap.timeline({ delay: 0.14, onComplete: go })
+                    .to(body, { rotationY: -100, duration: 0.62, ease: 'power2.in' }, 0)
+                    .to(pageSheen, { opacity: 1, duration: 0.5, ease: 'power1.in' }, 0)
+                    .fromTo(turn.querySelector('.page-turn-shade'), { opacity: 0.6 }, { opacity: 0, duration: 0.62, ease: 'power1.in' }, 0)
+            };
+        }
+
+        links.forEach(function (link) {
+            listen(link, 'click', function (event) {
+                // New-tab clicks, the current language and a turn in progress keep normal behaviour.
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) {
+                    return;
+                }
+                if (leaving) {
+                    event.preventDefault();
+                    return;
+                }
+                if (link.dataset.lang === currentLang || !turn) {
+                    return;
+                }
+                event.preventDefault();
+                leaveTo(link);
+            });
+        });
+
+        // The Back button can restore this page as it was left, mid-turn.
+        listen(window, 'pageshow', function (event) {
+            if (event.persisted) {
+                restore();
+            }
+        });
+
+        turnIn();
+
+        return function () {
+            restore();
+            removers.forEach(function (remove) { remove(); });
         };
     }
 
@@ -523,7 +775,7 @@
     var media = gsap.matchMedia();
 
     media.add(motionOk, function () {
-        var cleanups = [intro()];
+        var cleanups = [languageSwitch(), intro()];
         if (ST) {
             scrollReveals();
             cleanups.push(rebuildable(buildProcessPath));

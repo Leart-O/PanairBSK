@@ -82,6 +82,17 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin') {
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 root.classList.add('motion-pending');
                 setTimeout(function () { root.classList.remove('motion-pending'); }, 1500);
+
+                // Arriving from the other language: keep the title page in place until
+                // motion.js turns it. The timer shows the page if that script never runs.
+                try {
+                    var turnTo = sessionStorage.getItem('langTurn');
+                    sessionStorage.removeItem('langTurn');
+                    if (turnTo === root.lang) {
+                        root.classList.add('lang-turn-in');
+                        setTimeout(function () { root.classList.remove('lang-turn-in'); }, 2500);
+                    }
+                } catch (error) {}
             }
         })();
     </script>
@@ -93,6 +104,18 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin') {
     <link rel="stylesheet" href="style.css?v=<?php echo filemtime(__DIR__ . '/style.css'); ?>">
 </head>
 <body>
+
+<div class="page-turn" id="pageTurn" data-show="<?php echo $lang; ?>" aria-hidden="true">
+    <div class="page-turn-shade"></div>
+    <div class="page-turn-sheet">
+        <div class="page-turn-frame">
+            <p class="page-turn-school">The British School of Kosova</p>
+            <p class="page-turn-word" data-word="sq" lang="sq">Shqip</p>
+            <p class="page-turn-word" data-word="en" lang="en">English</p>
+        </div>
+        <div class="page-turn-sheen"></div>
+    </div>
+</div>
 
 <a class="skip-link" href="#main"><?php echo $en ? 'Skip to content' : 'Kalo te përmbajtja'; ?></a>
 
@@ -113,10 +136,10 @@ if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin') {
                 </ul>
             </nav>
 
-            <div class="language-switch" aria-label="<?php echo $en ? 'Language' : 'Gjuha'; ?>">
-                <a href="index.php"<?php echo !$en ? ' class="active" aria-current="true"' : ''; ?> lang="sq">AL</a>
-                <span aria-hidden="true">/</span>
-                <a href="indexAnglisht.php"<?php echo $en ? ' class="active" aria-current="true"' : ''; ?> lang="en">EN</a>
+            <div class="language-switch" id="languageSwitch" role="group" aria-label="<?php echo $en ? 'Language' : 'Gjuha'; ?>">
+                <span class="lang-thumb" aria-hidden="true"></span>
+                <a href="index.php"<?php echo !$en ? ' class="active" aria-current="true"' : ''; ?> lang="sq" data-lang="sq" aria-label="Shqip">AL</a>
+                <a href="indexAnglisht.php"<?php echo $en ? ' class="active" aria-current="true"' : ''; ?> lang="en" data-lang="en" aria-label="English">EN</a>
             </div>
 
             <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-controls="navLinks" aria-expanded="false"
