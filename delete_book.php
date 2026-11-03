@@ -10,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hold_id'])) {
 
     $hold_id = intval($_POST['hold_id']); 
 
-    // Delete the record from the `book_holds` table
-    $stmt = $db->prepare("DELETE FROM book_holds WHERE id = ?");
+    // Only returned holds can be deleted. Deleting a pending hold would lose its copy for good.
+    $stmt = $db->prepare("DELETE FROM book_holds WHERE id = ? AND return_status = 'returned'");
     $stmt->bind_param('i', $hold_id);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute() && $stmt->affected_rows === 1) {
         // Redirect back to admin panel with success message
         header('Location: admin.php?message=Book+record+deleted+successfully');
         exit;

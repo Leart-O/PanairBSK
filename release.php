@@ -1,14 +1,5 @@
 <?php
-if (isset($_POST['release_book'])) {
-    
-    include("config.php");
-    
-    // Release the book
-    $id = $_POST['id'];
-    $db->query("UPDATE librat SET available_books = available_books + 1, is_held = 0 WHERE id = $id");
-
-    // Redirect back to admin panel
-    header("Location: admin.php");
-    exit;
-}
-?>
+// Retired: this added a copy with no login check and no link to a reservation.
+// Returns are recorded by mark_returned.php, from the admin panel.
+header('Location: admin.php');
+exit;

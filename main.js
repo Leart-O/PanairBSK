@@ -1,195 +1,81 @@
+// Shared page behaviour. Every page loads this file once, from footer.php.
 
+// Show progress on forms that save something, and ignore an accidental second submit.
+// The button is deliberately not disabled: a disabled button would drop its name from
+// the request, and details.php and upload.php check for that name.
+(function () {
+    var forms = document.querySelectorAll('form[method="post" i]');
 
+    forms.forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (form.dataset.busy) {
+                event.preventDefault();
+                return;
+            }
+            form.dataset.busy = 'true';
+            var button = event.submitter || form.querySelector('[type="submit"]');
+            if (button) {
+                button.classList.add('is-busy');
+                button.setAttribute('aria-busy', 'true');
+            }
+        });
+    });
 
-// Mobile Menu Toggle
- const mobileMenuBtn = document.getElementById('mobileMenuBtn');
- const navLinks = document.getElementById('navLinks');
- const dropdowns = document.querySelectorAll('.dropdown');
+    // The Back button can restore a page exactly as it was left, so reset that state.
+    window.addEventListener('pageshow', function () {
+        forms.forEach(function (form) {
+            delete form.dataset.busy;
+            form.querySelectorAll('.is-busy').forEach(function (button) {
+                button.classList.remove('is-busy');
+                button.removeAttribute('aria-busy');
+            });
+        });
+    });
+})();
 
- mobileMenuBtn.addEventListener('click', () => {
-     navLinks.classList.toggle('active');
-     mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
-         '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
- });
-
- dropdowns.forEach(dropdown => {
-     const link = dropdown.querySelector('a');
-     
-     link.addEventListener('click', (e) => {
-         if (window.innerWidth <= 992) {
-             e.preventDefault();
-             dropdown.classList.toggle('active');
-         }
-     });
- });
-
- // Modal Toggles
- const loginIcon = document.getElementById('loginIcon');
- const loginModal = document.getElementById('loginModal');
- const closeLoginModal = document.getElementById('closeLoginModal');
- const cancelLogin = document.getElementById('cancelLogin');
- const registerLink = document.createElement('p');
- registerLink.innerHTML = 'Nuk keni llogari? <a href="#" id="showRegisterModal">Regjistrohu tani</a>';
- registerLink.style.marginTop = '1rem';
- registerLink.style.textAlign = 'center';
- document.querySelector('#loginForm').after(registerLink);
-
- const registerModal = document.getElementById('registerModal');
- const showRegisterModal = document.getElementById('showRegisterModal');
- const closeRegisterModal = document.getElementById('closeRegisterModal');
- const cancelRegister = document.getElementById('cancelRegister');
-
- const overlay = document.getElementById('overlay');
-
- function toggleModal(modal) {
-     modal.classList.toggle('active');
-     overlay.classList.toggle('active');
-     document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : '';
- }
-
- loginIcon.addEventListener('click', () => toggleModal(loginModal));
- closeLoginModal.addEventListener('click', () => toggleModal(loginModal));
- cancelLogin.addEventListener('click', () => toggleModal(loginModal));
- overlay.addEventListener('click', () => {
-     toggleModal(loginModal);
-     toggleModal(registerModal);
- });
-
- showRegisterModal.addEventListener('click', (e) => {
-     e.preventDefault();
-     toggleModal(loginModal);
-     toggleModal(registerModal);
- });
-
- closeRegisterModal.addEventListener('click', () => toggleModal(registerModal));
- cancelRegister.addEventListener('click', () => toggleModal(registerModal));
-
- // Cart Toggle
- const cartIcon = document.getElementById('cartIcon');
- const cartSidebar = document.getElementById('cartSidebar');
- const closeCart = document.getElementById('closeCart');
-
- cartIcon.addEventListener('click', () => {
-     cartSidebar.classList.add('active');
-     overlay.classList.add('active');
-     document.body.style.overflow = 'hidden';
- });
-
- closeCart.addEventListener('click', () => {
-     cartSidebar.classList.remove('active');
-     overlay.classList.remove('active');
-     document.body.style.overflow = '';
- });
-
- overlay.addEventListener('click', () => {
-     cartSidebar.classList.remove('active');
-     overlay.classList.remove('active');
-     document.body.style.overflow = '';
- });
-
- // Filter Books
- const filterTags = document.querySelectorAll('.filter-tag');
- const bookCards = document.querySelectorAll('.book-card');
-
- filterTags.forEach(tag => {
-     tag.addEventListener('click', () => {
-         const filterValue = tag.textContent.trim();
-         
-         filterTags.forEach(t => t.classList.remove('active'));
-         tag.classList.add('active');
-
-         bookCards.forEach(card => {
-             const categories = card.dataset.cat
-             egory.split(' ');
-             
-             if (filterValue === 'Të gjitha' || categories.includes(filterValue.toLowerCase().replace(' ', '-'))) {
-                 card.style.display = 'block';
-             } else {
-                 card.style.display = 'none';
-             }
-         });
-     });
- });
-
- // Add to Cart
- const addToCartBtns = document.querySelectorAll('.add-to-cart');
- const cartBadge = document.querySelector('.cart-icon .badge');
- let cartItemsCount = parseInt(cartBadge.textContent);
-
- addToCartBtns.forEach(btn => {
-     btn.addEventListener('click', function() {
-         // Change button text temporarily
-         const originalText = this.innerHTML;
-         this.innerHTML = '<i class="fas fa-check"></i> Shtuar';
-         this.style.backgroundColor = 'var(--success)';
-         
-         // Increment cart count
-         cartItemsCount++;
-         cartBadge.textContent = cartItemsCount;
-         
-         // Reset button after 2 seconds
-         setTimeout(() => {
-             this.innerHTML = originalText;
-             this.style.backgroundColor = 'var(--secondary)';
-         }, 2000);
-     });
- });
-
- // Animations on scroll
- const animateElements = document.querySelectorAll('.animate');
- 
- function checkAnimation() {
-     animateElements.forEach(element => {
-         const elementPosition = element.getBoundingClientRect().top;
-         const screenPosition = window.innerHeight / 1.2;
-         
-         if (elementPosition < screenPosition) {
-             element.style.opacity = '1';
-         }
-     });
- }
-
- window.addEventListener('scroll', checkAnimation);
- window.addEventListener('load', checkAnimation);
-
-
-
-
- const form = document.getElementById("npsform");
-
-/**
- * Multi-step Function to navigate
- */
-
-const navigateToFormStep = (stepNumber) => {
-  form.querySelectorAll(".step").forEach((el) => {
-    el.classList.add("hidden");
-  });
-
-  form.querySelector("#step" + stepNumber).classList.remove("hidden");
-};
-
-/**
- * Enable Navigation buttons
- */
-
-form.querySelectorAll(".navigate").forEach((nav) => {
-  nav.addEventListener("click", () => {
-    const stepNumber = parseInt(nav.getAttribute("data-step"));
-    navigateToFormStep(stepNumber);
-  });
-});
-
-
-
-function validateEmail() {
-    const emailInput = document.getElementById('email').value;
-    const allowedDomain = "@britishschoolkosova.com";
-
-    if (emailInput.endsWith(allowedDomain)) {
-        return true; // Lejohet
-    } else {
-        alert("Ju lutem përdorni një email që përfundon me @britishschoolkosova.com");
-        return false; // Ndalo dërgimin e formës
+// Mobile navigation toggle.
+(function () {
+    var button = document.getElementById('mobileMenuBtn');
+    var nav = document.getElementById('navLinks');
+    if (!button || !nav) {
+        return;
     }
-}
+
+    var icon = button.querySelector('i');
+
+    function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? button.dataset.labelClose : button.dataset.labelOpen);
+        if (icon) {
+            icon.className = open ? 'fas fa-times' : 'fas fa-bars';
+        }
+        if (open) {
+            document.dispatchEvent(new CustomEvent('nav:open', { detail: nav }));
+        }
+    }
+
+    button.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
+    });
+
+    // Following a link closes the menu, which matters for the on-page #kontakt link.
+    nav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+            setOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+            setOpen(false);
+            button.focus();
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        if (nav.classList.contains('is-open') && !nav.contains(event.target) && !button.contains(event.target)) {
+            setOpen(false);
+        }
+    });
+})();

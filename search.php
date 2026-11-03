@@ -10,34 +10,24 @@ if (isset($_GET['kerko'])) {
     $sql = "SELECT * FROM librat WHERE title LIKE '%$kerko%' OR author LIKE '%$kerko%'";
     $result = $db->query($sql);
 }
+$useScrollMotion = true;
 ?>
 
 <?php include("header.php"); ?>
 
-<div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Rezultatet e Kërkimit</h1>
+<div class="container page-head">
+    <h1 class="page-title" data-intro>Rezultatet e Kërkimit</h1>
 
     <?php if (isset($result) && $result->num_rows > 0): ?>
         <div class="books-grid">
             <?php while ($row = $result->fetch_assoc()): ?>
-                <div class="book-card">
-                    <div class="book-img">
-                        <img src="view.php?id=<?php echo $row['id']; ?>" alt="Book Image">
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title"><?php echo htmlspecialchars($row['title']); ?></h3>
-                        <p class="book-author"><?php echo htmlspecialchars($row['author']); ?></p>
-                        <p class="book-status">
-                            <strong>Kopje gjithsej:</strong> <?php echo $row['total_books']; ?><br>
-                            <strong>Kopje në dispozicion:</strong> <?php echo $row['available_books']; ?>
-                        </p>
-                        <a href="details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Shiko Detajet</a>
-                    </div>
-                </div>
+                <?php include("book_card.php"); ?>
             <?php endwhile; ?>
         </div>
     <?php else: ?>
-        <p class="text-center">Nuk u gjet asnjë libër për kërkimin tuaj.</p>
+        <div class="empty-state" data-intro>
+            <p>Nuk u gjet asnjë libër për kërkimin tuaj.</p>
+        </div>
     <?php endif; ?>
 </div>
 

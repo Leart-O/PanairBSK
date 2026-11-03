@@ -54,35 +54,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include("header.php"); ?>
 
-<div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Regjistrohu</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <?php if (!empty($error_message)): ?>
-                <div class="alert alert-danger text-center">
-                    <?php echo $error_message; ?>
-                </div>
-            <?php endif; ?>
-            <form method="POST" action="signup.php" class="p-4 border rounded shadow bg-white">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Emri</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" required>
-                </div>
-                <div class="mb-3">
-                    <label for="mbiemri" class="form-label">Mbiemri</label>
-                    <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Shkruaj Mbiemrin" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Shkollor</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Shkruaj email-in tuaj (@britishschoolkosova.com)" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Fjalëkalimi</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Regjistrohu</button>
-            </form>
-        </div>
+<div class="container page-head">
+    <div class="form-card" data-intro>
+        <h1>Regjistrohu</h1>
+        <?php if (!empty($error_message)): ?>
+            <div class="alert alert-danger text-center" role="alert">
+                <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
+        <form method="POST" action="signup.php">
+            <div class="mb-3">
+                <label for="name" class="form-label">Emri</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" autocomplete="given-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="mbiemri" class="form-label">Mbiemri</label>
+                <input type="text" name="mbiemri" id="mbiemri" class="form-control" placeholder="Shkruaj Mbiemrin" autocomplete="family-name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Shkollor</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="emri@britishschoolkosova.com" autocomplete="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Fjalëkalimi</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" autocomplete="new-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Regjistrohu</button>
+        </form>
     </div>
 </div>
 

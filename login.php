@@ -36,27 +36,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include("header.php"); ?>
 
-<div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Hyr</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="POST" action="login.php" class="p-4 border rounded shadow bg-white">
-                <?php if (isset($error)): ?>
-                    <div class="alert alert-danger text-center">
-                        <?php echo $error; ?>
-                    </div>
-                <?php endif; ?>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Emri</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" required>
+<div class="container page-head">
+    <div class="form-card" data-intro>
+        <h1>Hyr</h1>
+        <form method="POST" action="login.php">
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger text-center" role="alert">
+                    <?php echo $error; ?>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Fjalëkalimi</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Hyr</button>
-            </form>
-        </div>
+            <?php endif; ?>
+            <div class="mb-3">
+                <label for="name" class="form-label">Emri</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Shkruaj Emrin" autocomplete="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Fjalëkalimi</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Shkruaj Fjalëkalimin" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Hyr</button>
+        </form>
     </div>
 </div>
 

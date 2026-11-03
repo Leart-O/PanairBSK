@@ -38,102 +38,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_type']) && $_POS
     $stmt->close();
     $db->close();
 }
+
+// Shared layout: pages set $lang = 'en' (via headerA.php) before including this file.
+$lang = (isset($lang) && $lang === 'en') ? 'en' : 'sq';
+$en = $lang === 'en';
+$currentPage = basename($_SERVER['PHP_SELF']);
+$homeUrl = $en ? 'indexAnglisht.php' : 'index.php';
+
+$navItems = [];
+if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin') {
+    $navItems = [
+        ['admin.php', $en ? 'Administrator Panel' : 'Paneli Administratorit'],
+        ['upload.php', $en ? 'Add a book' : 'Shto një libër'],
+        ['logout.php', $en ? 'Log out' : 'Shkyçu'],
+    ];
+} elseif (isset($_SESSION['user_id'])) {
+    $navItems = [
+        [$homeUrl, $en ? 'Home' : 'Kryefaqja'],
+        ['books.php', $en ? 'Books' : 'Librat'],
+        ['#kontakt', $en ? 'About Us' : 'Rreth nesh'],
+        ['logout.php', $en ? 'Log out' : 'Shkyçu'],
+    ];
+} else {
+    $navItems = [
+        ['books.php', $en ? 'Books' : 'Librat'],
+        ['signup.php', $en ? 'Sign Up' : 'Regjistrohu'],
+        ['login.php', $en ? 'Log In' : 'Hyr'],
+    ];
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $lang; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblioteka Shkollore</title>
+    <title><?php echo $en ? 'BSK School Library' : 'Biblioteka Shkollore'; ?></title>
+    <script>
+        // Hide only the intro elements until motion.js takes over. The timer keeps
+        // the page readable if the animation scripts fail to load.
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                root.classList.add('motion-pending');
+                setTimeout(function () { root.classList.remove('motion-pending'); }, 1500);
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Loading Screen */
-        #loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff; /* Ngjyra e sfondit të loading */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3; /* Ngjyra e jashtme */
-            border-top: 5px solid #3498db; /* Ngjyra e brendshme */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        /* Animacioni i rrotullimit */
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css?v=<?php echo filemtime(__DIR__ . '/style.css'); ?>">
 </head>
 <body>
 
-<!-- Loading Animation -->
-<div id="loading">
-    <div class="spinner"></div>
-</div>
+<a class="skip-link" href="#main"><?php echo $en ? 'Skip to content' : 'Kalo te përmbajtja'; ?></a>
 
-<header>
+<header class="site-header" id="siteHeader">
     <div class="container">
         <div class="header-inner">
-            <a href="index.php" class="logo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="Logo">
-                <span>Biblioteka </span>BSK
+            <a href="<?php echo $homeUrl; ?>" class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpRjK0y6ryJlazJhzOrwJO7t6xppvj2pLjikw2xzhupMWG216NvKchLiyn9KCSRcniEw&usqp=CAU" alt="" width="44" height="44">
+                <span><?php echo $en ? 'BSK Library' : 'Biblioteka BSK'; ?></span>
             </a>
 
-            <ul class="nav-links" id="navLinks">
-                <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'admin'): ?>
-                    <li><a href="admin.php" class="active">Paneli Administratorit</a></li>
-                    <li><a href="upload.php">Shto një libër</a></li>
-                    <li><a href="logout.php">Shkyçu</a></li>
-                <?php elseif (isset($_SESSION['user_id'])): ?>
-                    <li><a href="index.php" class="active">Kryefaqja</a></li>
-                    <li><a href="#kontakt">Rreth nesh</a></li>
-                    <li><a href="logout.php">Shkyqu</a></li>
-                <?php else: ?>
-                    <li><a href="signup.php">Regjistrohu</a></li>
-                    <li><a href="login.php">Hyr</a></li>
-                <?php endif; ?>
-            </ul>
+            <nav aria-label="<?php echo $en ? 'Main navigation' : 'Navigimi kryesor'; ?>">
+                <ul class="nav-links" id="navLinks">
+                    <?php foreach ($navItems as $item): ?>
+                        <?php $isCurrent = $item[0] === $currentPage; ?>
+                        <li><a href="<?php echo $item[0]; ?>"<?php echo $isCurrent ? ' class="active" aria-current="page"' : ''; ?>><?php echo $item[1]; ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
 
-            <div class="language-switch">
-                <a href="index.php">AL</a>
-                <span>/</span>
-                <a href="indexAnglisht.php">EN</a>
+            <div class="language-switch" aria-label="<?php echo $en ? 'Language' : 'Gjuha'; ?>">
+                <a href="index.php"<?php echo !$en ? ' class="active" aria-current="true"' : ''; ?> lang="sq">AL</a>
+                <span aria-hidden="true">/</span>
+                <a href="indexAnglisht.php"<?php echo $en ? ' class="active" aria-current="true"' : ''; ?> lang="en">EN</a>
             </div>
-  
+
+            <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-controls="navLinks" aria-expanded="false"
+                    aria-label="<?php echo $en ? 'Open menu' : 'Hap menunë'; ?>"
+                    data-label-open="<?php echo $en ? 'Open menu' : 'Hap menunë'; ?>"
+                    data-label-close="<?php echo $en ? 'Close menu' : 'Mbyll menunë'; ?>">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
-    
+    <div class="scroll-progress" aria-hidden="true"></div>
 </header>
 
-<script>
-    // Hide loading animation after page load
-    window.addEventListener('load', () => {
-        const loading = document.getElementById('loading');
-        if (loading) {
-            setTimeout(() => {
-                loading.style.display = 'none';
-            }, 1000); // 2 seconds
-        }
-    });
-</script>
-</body>
-</html>
+<main id="main">

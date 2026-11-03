@@ -52,33 +52,38 @@ if (!empty($_GET['id'])) {
 
 <?php include("header.php"); ?>
 
-   
-
-<div class="container mt-5">
-    <div class="row">
+<div class="container page-head">
+    <div class="detail-layout">
         <!-- Book Image -->
-        <div class="col-md-4">
-            <img src="view.php?id=<?php echo $book['id']; ?>" alt="Book Image" class="img-fluid rounded shadow">
+        <div class="detail-cover" data-intro>
+            <img src="view.php?id=<?php echo $book['id']; ?>" alt="Kopertina e librit <?php echo htmlspecialchars($book['title']); ?>">
         </div>
 
         <!-- Book Details -->
-        <div class="col-md-8">
-            <h1 class="text-primary"><?php echo htmlspecialchars($book['title']); ?></h1>
-            <p><strong>Autori:</strong> <?php echo htmlspecialchars($book['author']); ?></p>
-            <p><strong>Përshkrimi:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
-            <p><strong>Kopje gjithsej:</strong> <?php echo $book['total_books']; ?></p>
-            <p><strong>Kopje në dispozicion:</strong> <?php echo $book['available_books']; ?></p>
-            <p><strong>Statusi:</strong> 
-                <span class="badge <?php echo $book['is_held'] ? 'bg-danger' : 'bg-success'; ?>">
-                    <?php echo $book['is_held'] ? 'Held' : 'Available'; ?>
-                </span>
-            </p>
+        <div>
+            <h1 data-intro><?php echo htmlspecialchars($book['title']); ?></h1>
+            <dl class="detail-meta" data-intro>
+                <dt>Autori</dt>
+                <dd><?php echo htmlspecialchars($book['author']); ?></dd>
+                <dt>Përshkrimi</dt>
+                <dd><?php echo htmlspecialchars($book['description']); ?></dd>
+                <dt>Kopje gjithsej</dt>
+                <dd><?php echo $book['total_books']; ?></dd>
+                <dt>Kopje në dispozicion</dt>
+                <dd><?php echo $book['available_books']; ?></dd>
+                <dt>Statusi</dt>
+                <dd>
+                    <span class="status-pill <?php echo $book['is_held'] ? 'status-none' : 'status-ok'; ?>">
+                        <?php echo $book['is_held'] ? 'Held' : 'Available'; ?>
+                    </span>
+                </dd>
+            </dl>
 
             <!-- Hold Book Form -->
-            <form method="post" class="mt-4">
+            <form method="post" class="hold-form" data-intro>
                 <?php if (!isset($_SESSION['user_id'])): ?>
                     <div class="alert alert-warning">
-                        Ju duhet të<a href="login.php" class="alert-link"> kyqeni</a> ose <a href="signup.php" class="alert-link">krijoni llogari</a> për të rezervuar këtë libër.
+                        Ju duhet të <a href="login.php" class="alert-link">kyçeni</a> ose <a href="signup.php" class="alert-link">krijoni llogari</a> për të rezervuar këtë libër.
                     </div>
                 <?php else: ?>
                     <div class="mb-3">
@@ -91,77 +96,21 @@ if (!empty($_GET['id'])) {
                     <?php if (isset($success_message)): ?>
                         <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                             <strong>Sukses!</strong> <?php echo $success_message; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Mbyll"></button>
                         </div>
                     <?php endif; ?>
                     <?php if (isset($error_message)): ?>
                         <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                             <strong>Gabim!</strong> <?php echo $error_message; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Mbyll"></button>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
             </form>
 
-            <a href="index.php" class="btn btn-secondary mt-3">Kthehu</a>
+            <a href="books.php" class="btn btn-secondary" data-intro>Kthehu</a>
         </div>
     </div>
 </div>
 
-<br><br><br><br>
-
-  <!-- Footer -->
-  <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div id="kontakt"></div>
-                    <h3>Rreth nesh</h3>
-                    <p>Biblioteka Shkollore Online është platforma kryesore për huazimin e librave arsimorë brenda shkolles.</p>
-                    <div class="social-links">
-                        <a href="https://britishschoolkosova.com/"><i class="fa fa-globe"></i></a>
-                        <a href="https://www.facebook.com/BritishSchoolKosova/"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/thebritishschoolofkosova/?hl=en"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/bsk-the-british-school-of-kosova-a2b5051a5"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-
-                <div class="footer-col">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2935.012643531661!2d21.10708847661339!3d42.639891917375856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13549e09a30ff837%3A0xd43d44deb9fe3567!2sThe%20British%20School%20of%20Kosova!5e0!3m2!1sen!2s!4v1744883171335!5m2!1sen!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Kontakt</h3>
-                    <ul class="footer-contact">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Rr Aleks Çaçi, Fushë Kosovë</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone-alt"></i>
-                            <span> +383 48 999 172 / 173</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>info@britishschoolkosova.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <span>E Hënë - E Premte: 08:00 - 16:00</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2023 Biblioteka Shkollore Online. Të gjitha të drejtat e rezervuara.</p>
-            </div>
-        </div>
-    </footer>
-</div>
- <script src="main.js"></script>
-   
- <?php include("footer.php");?>
+<?php include("footer.php"); ?>
