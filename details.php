@@ -88,7 +88,7 @@ if (!empty($_GET['id'])) {
                 <?php else: ?>
                     <div class="mb-3">
                         <label for="pickup_date" class="form-label">Data e marrjes:</label>
-                        <input type="date" name="pickup_date" id="pickup_date" class="form-control" required>
+                        <input type="date" name="pickup_date" id="pickup_date" class="form-control" min="<?php echo date('Y-m-d'); ?>" data-datepicker required>
                     </div>
                     <button type="submit" name="hold_book" class="btn btn-primary" <?php echo ($book['available_books'] == 0 || $book['is_held']) ? 'disabled' : ''; ?>>
                         Rezervo Librin
