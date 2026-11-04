@@ -9,6 +9,7 @@ if ($category) {
     $query .= " WHERE category = '$category'";
 }
 $result = $db->query($query);
+$books = array_merge($result ? $result->fetch_all(MYSQLI_ASSOC) : [], demo_books_in_category($category));
 
 $useScrollMotion = true;
 $categoryLinks = [
@@ -36,11 +37,11 @@ $categoryLinks = [
     </div>
 
     <!-- Books Grid -->
-    <?php if ($result && $result->num_rows > 0): ?>
+    <?php if ($books): ?>
         <div class="books-grid">
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php foreach ($books as $row): ?>
                 <?php include("book_card.php"); ?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </div>
     <?php else: ?>
         <div class="empty-state">

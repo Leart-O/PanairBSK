@@ -12,4 +12,6 @@ $db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
+
+require_once __DIR__ . '/demo_books.php';
 ?>

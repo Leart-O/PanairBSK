@@ -2,8 +2,9 @@
 session_start();
 include("config.php");
 
-// Fetch the 4 newest books
+// Fetch the 4 newest books, with the demo books counted as newest
 $result = $db->query("SELECT id, title, author, foto, total_books, available_books FROM librat ORDER BY id DESC LIMIT 4");
+$books = array_slice(array_merge(demo_home_books(), $result->fetch_all(MYSQLI_ASSOC)), 0, 4);
 $useScrollMotion = true;
 $useMotionPath = true;
 ?>
@@ -43,9 +44,9 @@ $useMotionPath = true;
             </div>
 
             <div class="books-grid">
-                <?php while ($row = $result->fetch_assoc()): ?>
+                <?php foreach ($books as $row): ?>
                     <?php include("book_card.php"); ?>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

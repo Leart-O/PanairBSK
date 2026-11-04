@@ -14,6 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['hold_id'])) {
 include("config.php");
 
 $hold_id = intval($_POST['hold_id']);
+
+if (demo_is_id($hold_id)) {
+    $was_pending = demo_mark_returned($hold_id);
+    header('Location: admin.php?message=' . ($was_pending ? 'Book+marked+as+returned+successfully' : 'This+book+was+already+returned'));
+    exit;
+}
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {

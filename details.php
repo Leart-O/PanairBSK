@@ -6,11 +6,14 @@ if (!empty($_GET['id'])) {
 
     // Fetch book details from the database
     $id = intval($_GET['id']); // Sanitize the input
-    $result = $db->query("SELECT * FROM librat WHERE id = $id");
-
-    if ($result && $result->num_rows > 0) {
-        $book = $result->fetch_assoc();
+    if (demo_is_id($id)) {
+        $book = demo_find_book($id);
     } else {
+        $result = $db->query("SELECT * FROM librat WHERE id = $id");
+        $book = $result && $result->num_rows > 0 ? $result->fetch_assoc() : null;
+    }
+
+    if (!$book) {
         // Handle case where no book is found
         echo "<p>Book not found. Please go back to the <a href='index.php'>main page</a>.</p>";
         exit; // Stop further execution
@@ -32,19 +35,29 @@ if (!empty($_GET['id'])) {
             exit;
         }
 
-        // Insert into `book_holds` table
-        $stmt = $db->prepare("INSERT INTO book_holds (user_id, book_id, hold_date, pickup_date) VALUES (?, ?, CURDATE(), ?)");
-        $stmt->bind_param('iis', $user_id, $id, $pickup_date);
-
-        if ($stmt->execute()) {
-            // Decrease available_books in `librat` table
-            $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
-            $book['available_books'] -= 1;
-
-            // Display success message
-            $success_message = "Libri u rezervua me sukses!";
+        if (demo_is_id($id)) {
+            // Demo books keep their reservations in a local file, not the database
+            if (demo_place_hold($user_id, $id, $pickup_date)) {
+                $book = demo_find_book($id);
+                $success_message = "Libri u rezervua me sukses!";
+            } else {
+                $error_message = "Rezervimi i librit dështoi. Ju lutem provoni përsëri.";
+            }
         } else {
-            $error_message = "Rezervimi i librit dështoi. Ju lutem provoni përsëri.";
+            // Insert into `book_holds` table
+            $stmt = $db->prepare("INSERT INTO book_holds (user_id, book_id, hold_date, pickup_date) VALUES (?, ?, CURDATE(), ?)");
+            $stmt->bind_param('iis', $user_id, $id, $pickup_date);
+
+            if ($stmt->execute()) {
+                // Decrease available_books in `librat` table
+                $db->query("UPDATE librat SET available_books = available_books - 1 WHERE id = $id");
+                $book['available_books'] -= 1;
+
+                // Display success message
+                $success_message = "Libri u rezervua me sukses!";
+            } else {
+                $error_message = "Rezervimi i librit dështoi. Ju lutem provoni përsëri.";
+            }
         }
     }
 }
@@ -56,7 +69,7 @@ if (!empty($_GET['id'])) {
     <div class="detail-layout">
         <!-- Book Image -->
         <div class="detail-cover" data-intro>
-            <img src="view.php?id=<?php echo $book['id']; ?>" alt="Kopertina e librit <?php echo htmlspecialchars($book['title']); ?>">
+            <img src="<?php echo htmlspecialchars(book_cover_url($book)); ?>" alt="Kopertina e librit <?php echo htmlspecialchars($book['title']); ?>">
         </div>
 
         <!-- Book Details -->

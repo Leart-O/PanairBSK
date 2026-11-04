@@ -9,6 +9,7 @@ if (isset($_GET['kerko'])) {
     // Kërkimi në titull ose autor
     $sql = "SELECT * FROM librat WHERE title LIKE '%$kerko%' OR author LIKE '%$kerko%'";
     $result = $db->query($sql);
+    $books = array_merge($result->fetch_all(MYSQLI_ASSOC), demo_search_books($_GET['kerko']));
 }
 $useScrollMotion = true;
 ?>
@@ -18,11 +19,11 @@ $useScrollMotion = true;
 <div class="container page-head">
     <h1 class="page-title" data-intro>Rezultatet e Kërkimit</h1>
 
-    <?php if (isset($result) && $result->num_rows > 0): ?>
+    <?php if (!empty($books)): ?>
         <div class="books-grid">
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php foreach ($books as $row): ?>
                 <?php include("book_card.php"); ?>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </div>
     <?php else: ?>
         <div class="empty-state" data-intro>

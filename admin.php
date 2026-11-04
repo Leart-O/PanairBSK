@@ -12,6 +12,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.email, l.title, bh.hold
                       FROM book_holds bh
                       JOIN users u ON bh.user_id = u.id
                       JOIN librat l ON bh.book_id = l.id");
+$holds = array_merge($result->fetch_all(MYSQLI_ASSOC), demo_admin_rows($db));
 ?>
 
 <?php include("header.php"); ?>
@@ -47,12 +48,12 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.email, l.title, bh.hold
                 </tr>
             </thead>
             <tbody>
-                <?php if ($result->num_rows === 0): ?>
+                <?php if (!$holds): ?>
                     <tr>
                         <td colspan="7" class="text-center py-4">Nuk ka libra të rezervuar për momentin.</td>
                     </tr>
                 <?php endif; ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
+                <?php foreach ($holds as $row): ?>
                     <tr>
                         <td><?php echo $row['name'] . ' ' . $row['mbiemri']; ?></td>
                         <td><?php echo $row['email']; ?></td>
@@ -78,7 +79,7 @@ $result = $db->query("SELECT bh.id, u.name, u.mbiemri, u.email, l.title, bh.hold
                             <?php endif; ?>
                         </td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

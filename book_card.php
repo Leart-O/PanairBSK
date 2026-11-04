@@ -6,7 +6,7 @@ $cardTitle = htmlspecialchars($row['title']);
 ?>
 <article class="book-card">
     <div class="book-img">
-        <img src="view.php?id=<?php echo (int) $row['id']; ?>" alt="<?php echo ($en ? 'Cover of ' : 'Kopertina e librit ') . $cardTitle; ?>" loading="lazy">
+        <img src="<?php echo htmlspecialchars(book_cover_url($row)); ?>" alt="<?php echo ($en ? 'Cover of ' : 'Kopertina e librit ') . $cardTitle; ?>" loading="lazy">
     </div>
     <div class="book-info">
         <h3 class="book-title"><?php echo $cardTitle; ?></h3>
